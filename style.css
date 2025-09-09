@@ -108,3 +108,9 @@ footer {
   margin-bottom: 1rem;
   line-height: 1.6;
 }
+
+.btn.disabled {
+  background: #555;
+  cursor: not-allowed;
+  pointer-events: none;
+}
