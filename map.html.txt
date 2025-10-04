@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Maps — Daliverse</title>
+  <meta name="description" content="Download Tricking 0 maps by Dali">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/logo.png" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-left">
+      <img src="assets/logo.png" alt="logo" class="logo" onerror="this.style.display='none'">
+      <a class="brand" href="index.html">Daliverse</a>
+    </div>
+    <div class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="maps.html" class="active">Maps</a>
+      <a href="socials.html">Socials</a>
+      <div class="theme-toggle" id="themeToggleMaps">☀️</div>
+    </div>
+  </nav>
+
+  <header class="hero-compact" style="background-image: url('assets/banner.jpg')">
+    <div class="overlay">
+      <h1>Tricking 0 Maps</h1>
+      <p>Custom maps by Dali — tropical Axora vibes.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="map-gallery" id="map-gallery" data-aos="fade-up">
+      <!-- Example map card - drop your files in /assets/maps/ -->
+      <div class="map-card">
+        <img src="assets/maps/axora.png" alt="Axora Icon">
+        <h2>Axora</h2>
+        <div class="map-actions">
+          <a class="btn" href="assets/maps/axora.zip" download>Download Map (ZIP)</a>
+          <a class="btn btn-light" href="assets/maps/axora.png" download>Download Icon</a>
+        </div>
+        <p class="note">Includes JSON & PNG bundled in the zip.</p>
+      </div>
+
+      <!-- Placeholder card -->
+      <div class="map-card">
+        <img src="assets/placeholder.png" alt="coming soon">
+        <h2>New Map</h2>
+        <div class="map-actions">
+          <a class="btn disabled" href="#">Coming Soon</a>
+        </div>
+        <p class="note">Drop a <code>mapname.zip</code> + <code>mapname.png</code> into <code>/assets/maps/</code> and add a card (copy HTML block).</p>
+      </div>
+    </section>
+
+    <section class="lore" data-aos="fade-up">
+      <h2>Lore & Story</h2>
+      <p><strong>Axora:</strong> A tropical archipelago designed for high-level tricking and creative dives. Explore hidden cliffs and jump points — built around fluid movement and scenic views.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year2"></span> Dali — Daliverse</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+  <script> AOS.init({ once: true, duration: 700 }); </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>About — Daliverse</title>
+        <link rel="stylesheet"
+            href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="nav-left">
+                <img src="assets/logo.png" alt="logo" class="logo"
+                    onerror="this.style.display='none'">
+                <a class="brand" href="index.html">Daliverse</a>
+            </div>
+            <div class="nav-right">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="maps.html">Maps</a>
+                <a href="socials.html">Socials</a>
+                <div class="theme-toggle" id="themeToggleAbout">☀️</div>
+            </div>
+        </nav>
+
+        <header class="subheader">
+            <div class="overlay">
+                <h1>About Me</h1>
+                <p>My journey, training, and work</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="about-grid" data-aos="fade-up">
+                <div class="about-photo">
+                    <img src="assets/placeholder.png" alt="Dali portrait">
+                </div>
+                <div class="about-content">
+                    <h2>Hello — I’m Dali</h2>
+                    <p>I’m a tricking & trampoline athlete and community
+                        manager. I build servers and maps for Tricking 0, run
+                        events and manage communities. This site is a place to
+                        show my work and keep everything tidy.</p>
+                    <h3>Skills</h3>
+                    <ul>
+                        <li>Tricking & advanced trampoline</li>
+                        <li>Community management (Discord)</li>
+                        <li>Server & map development (Minecraft + custom)</li>
+                        <li>Web design — learning & building this site</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="timeline" data-aos="fade-up">
+                <h2>Journey</h2>
+                <ol>
+                    <li><strong>2017</strong> — Started creating Minecraft
+                        servers</li>
+                    <li><strong>2024</strong> — Created Tricking 0 maps &
+                        community work</li>
+                    <li><strong>2025</strong> — Daliverse portfolio and web
+                        design</li>
+                </ol>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© <span id="year3"></span> Dali — Daliverse</p>
+        </footer>
+
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script src="js/main.js"></script>
+        <script> AOS.init({ once: true, duration: 700 }); </script>
+    </body>
+</html>

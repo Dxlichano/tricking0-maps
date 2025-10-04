@@ -1,51 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tricking 0 Maps - by Dali</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- Fullscreen Header -->
-  <header>
-    <div class="overlay">
-      <h1>Tricking 0 Maps</h1>
-      <p>Custom maps created by Dali</p>
-      <a href="#maps" class="scroll-down">▼</a>
-    </div>
-  </header>
-
-  <main>
-    <!-- Map Gallery -->
-    <section id="maps" class="map-gallery">
-      <!-- Example Map -->
-      <div class="map-card">
-        <img src="maps/Axora.png" alt="Axora Icon">
-        <h2>Axora</h2>
-        <a href="maps/Axora.zip" download class="btn">Download Map</a>
-        <p class="note">Includes JSON & PNG</p>
-        <p class="note">Created by Dali</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Daliverse — Dali's Portfolio</title>
+    <meta name="description"
+      content="Daliverse — Dali: tricking athlete, community manager, and game dev.">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="assets/logo.png" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-left">
+        <img src="assets/logo.png" alt="Daliverse logo" class="logo"
+          onerror="this.style.display='none'">
+        <a class="brand" href="index.html">Daliverse</a>
       </div>
-
-      <!-- Placeholder Map -->
-      <div class="map-card">
-        <img src="https://via.placeholder.com/400x200/228b22/ffffff?text=Coming+Soon" alt="Placeholder">
-        <h2>New Map</h2>
-        <a href="#" class="btn disabled">Coming Soon</a>
-        <p class="note">JSON & PNG will be added</p>
+      <div class="nav-right">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="maps.html">Maps</a>
+        <a href="socials.html">Socials</a>
+        <div class="theme-toggle" id="themeToggle" title="Change theme">☀️</div>
+        <button class="menu-toggle" id="menuToggle">≡</button>
       </div>
-    </section>
+    </nav>
 
-    <!-- Lore Section -->
-    <section class="lore">
-      <h2>Lore & Story</h2>
-      <p><strong>Axora:</strong> Discovered in 2012 by legendary tricker and cliff diver Axoria Fonso, the islands of Axora were once wild and untouched. In 2020, after a major investment from Fullin Studios, Axora transformed into the paradise you see today — a global hotspot where trickers and divers push the limits of movement against a stunning backdrop of sun, sea, and cliffs.</p>
-    </section>
-  </main>
+    <!-- Hero -->
+    <header class="hero" id="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Welcome to the Daliverse</h1>
+        <p class="lead">I’m <strong>Dali</strong> — tricker, trampoline athlete,
+          community manager, and creator of Tricking 0.</p>
+        <div class="hero-cta">
+          <a class="btn" href="projects.html">See Projects</a>
+          <a class="btn btn-ghost" href="maps.html">Maps</a>
+        </div>
+      </div>
+      <a href="#sections" class="scroll-down">▼</a>
+    </header>
 
-  <footer>
-    <p>© 2025 Dali | Tricking 0 Maps</p>
-  </footer>
-</body>
+    <main id="sections">
+      <!-- Quick Links / Cards -->
+      <section class="cards" data-aos="fade-up">
+        <div class="card">
+          <img src="assets/placeholder.png" alt="tricking">
+          <h3>Tricking & Trampoline</h3>
+          <p>Gallery of flips, training highlights, and progress. Add photos or
+            embed videos.</p>
+          <a href="projects.html" class="card-link">Explore</a>
+        </div>
+
+        <div class="card">
+          <img src="assets/placeholder.png" alt="community">
+          <h3>Community & Management</h3>
+          <p>Discord moderation, event org & community growth — portfolio items
+            and case studies.</p>
+          <a href="projects.html" class="card-link">See Work</a>
+        </div>
+
+        <div class="card">
+          <img src="assets/placeholder.png" alt="maps">
+          <h3>Tricking 0 Maps</h3>
+          <p>Tropical Axora-style maps — downloadable packages (JSON + PNG in a
+            ZIP).</p>
+          <a href="maps.html" class="card-link">Open Maps</a>
+        </div>
+
+        <div class="card">
+          <img src="assets/placeholder.png" alt="socials">
+          <h3>Socials Hub</h3>
+          <p>A creative landing page that houses all my socials in a neat,
+            shareable format.</p>
+          <a href="socials.html" class="card-link">Visit</a>
+        </div>
+      </section>
+
+      <!-- Short Bio -->
+      <section class="bio" data-aos="fade-right">
+        <div class="bio-left">
+          <img src="assets/placeholder.png" alt="Dali portrait">
+        </div>
+        <div class="bio-right">
+          <h2>Hi — I’m Dali</h2>
+          <p>I train tricking and trampoline at high level and build community &
+            games (Tricking 0). This site is my portfolio and playground — a
+            place to show skills, maps, and community projects.</p>
+          <p>Use the Projects and Maps pages to dive deeper. Everything here is
+            easy to update — just replace images / text in the files.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Dali — Daliverse</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script> AOS.init({ once: true, duration: 700 }); </script>
+  </body>
 </html>
