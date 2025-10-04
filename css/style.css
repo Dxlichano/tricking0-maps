@@ -134,7 +134,6 @@ body.theme-gradient {
   text-align: center;
   color: white;
   overflow: hidden;
-  z-index: 1; /* Fix: keep hero below nav but above overlay */
 }
 .hero::after {
   content: "";
