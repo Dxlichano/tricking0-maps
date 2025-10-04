@@ -1,3 +1,5 @@
+Add the banner fix to this please
+
 /* ---------- Fonts & resets ---------- */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
@@ -15,7 +17,6 @@ body {
   color: var(--text);
   transition: background 300ms ease, color 300ms ease;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 /* ---------- Theme variables (light default) ---------- */
@@ -133,7 +134,7 @@ body.theme-gradient {
   text-align: center;
   color: white;
   overflow: hidden;
-  z-index: 0;
+  z-index: 1; /* Fix: keep hero below nav but above overlay */
 }
 .hero::after {
   content: "";
@@ -141,7 +142,6 @@ body.theme-gradient {
   inset: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
   pointer-events: none;
-  z-index: 1;
 }
 .hero-content {
   position: relative;
@@ -217,8 +217,6 @@ body.theme-gradient {
   max-width: 1100px;
   margin: 2.2rem auto;
   padding: 0 1.2rem;
-  position: relative;
-  z-index: 2;
 }
 
 /* ---------- Cards grid ---------- */
@@ -229,8 +227,6 @@ body.theme-gradient {
   padding: 2rem;
   max-width: 1200px;
   margin: -4rem auto 2rem;
-  position: relative;
-  z-index: 2;
 }
 .card {
   background: var(--card);
@@ -240,8 +236,6 @@ body.theme-gradient {
   text-align: center;
   transition: transform 260ms;
   overflow: hidden;
-  position: relative;
-  z-index: 2;
 }
 .card img {
   width: 100%;
@@ -359,75 +353,52 @@ body.theme-gradient {
   color: #666 !important;
 }
 
-/* ---------- Projects / Portfolio ---------- */
+/* ---------- Projects / About ---------- */
+.subheader {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.04));
+  color: var(--text);
+}
+.subheader .overlay {
+  padding: 1.2rem;
+}
+
+/* about grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.6rem;
+  align-items: start;
+  padding: 2rem;
+}
+.about-photo img {
+  width: 100%;
+  border-radius: 12px;
+}
+.timeline {
+  padding: 2rem;
+  background: var(--card);
+  margin: 1rem 0;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* projects */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.2rem;
+  gap: 1rem;
   padding: 2rem 0;
 }
 .project-card {
   background: var(--card);
-  border-radius: 14px;
+  border-radius: 12px;
+  padding: 1rem;
   box-shadow: var(--shadow);
-  overflow: hidden;
-  position: relative;
-  transition: transform 260ms ease, box-shadow 260ms ease;
-}
-.project-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-  transition: transform 300ms ease;
-}
-.project-card:hover img {
-  transform: scale(1.06);
-}
-.project-card h3 {
-  margin: 0.9rem 0 0.3rem;
-  padding: 0 1rem;
-  color: var(--text);
-}
-.project-card p {
-  padding: 0 1rem;
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-.project-card::before {
-  content: attr(data-icon);
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.15);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 0, 255, 0.15),
-    rgba(0, 0, 0, 0.15)
-  );
-  opacity: 0;
-  transition: opacity 250ms ease;
-  z-index: 2;
-  pointer-events: none;
-}
-.project-card:hover::before {
-  opacity: 1;
-}
-.project-card .link {
-  display: block;
   text-align: center;
-  font-weight: 600;
-  color: #ff00cc;
-  text-decoration: none;
-  margin-bottom: 1rem;
-}
-.project-card .link:hover {
-  text-decoration: underline;
 }
 
 /* socials hub */
