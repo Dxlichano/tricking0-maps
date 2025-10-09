@@ -3,113 +3,76 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dali Verse — Explore the Daliverse</title>
-        <meta name="description"
-            content="Welcome to Dali Verse — home of tricker and creator Dali. Explore projects, maps, and the Tricking 0 community." />
-
-        <!-- Social Meta -->
-        <meta property="og:title"
-            content="Dali Verse — Explore the Daliverse" />
-        <meta property="og:description"
-            content="Tricking athlete, community builder, and creator of Tricking 0." />
-        <meta property="og:image" content="assets/logo.png" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://daliverse.nl" />
-
-        <!-- Styles -->
-        <link rel="stylesheet"
-            href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+        <title>Dali Verse</title>
         <link rel="stylesheet" href="css/style.css" />
-        <link rel="icon" href="assets/logo.png" />
     </head>
-    <body class="theme-dark">
-        <nav class="nav" aria-label="Main Navigation">
-            <div class="nav-left">
-                <img src="assets/logo.png" alt="Dali Verse logo" class="logo" />
-                <a class="brand" href="index.html">Dali Verse</a>
-            </div>
+    <body class="theme-dark-neon">
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="index.html" class="brand">Dali Verse</a>
             <div class="nav-right">
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="maps.html">Maps</a>
+                <a href="about.html">About</a>
                 <a href="socials.html">Socials</a>
-                <button id="themeToggle" class="theme-toggle"
-                    title="Switch Theme">✨</button>
+                <button id="themeToggle" class="theme-toggle">☰</button>
             </div>
         </nav>
 
-        <header class="hero" id="hero">
-            <div class="overlay"></div>
-            <div class="hero-content" data-aos="fade-up">
-                <h1>Enter the Dali Verse</h1>
-                <p class="lead">Athlete. Creator. Architect of Tricking 0.</p>
-                <div class="hero-cta">
-                    <a class="btn" href="projects.html">Explore Projects</a>
-                    <a class="btn btn-ghost" href="maps.html">Discover Maps</a>
+        <!-- Hero Section -->
+        <section class="hero split-hero">
+            <div class="hero-left">
+                <div class="hero-content">
+                    <h1>Movement meets creation</h1>
+                    <p class="lead">Welcome to the Dali Verse — where art,
+                        motion, and imagination collide.</p>
+                    <div class="hero-buttons">
+                        <a href="projects.html" class="btn">Explore Projects</a>
+                        <a href="maps.html" class="btn btn-ghost">View Maps</a>
+                    </div>
                 </div>
             </div>
-        </header>
 
-        <main>
-            <section class="cards" data-aos="fade-up">
-                <div class="card">
-                    <img src="assets/placeholder.png"
-                        alt="Tricking and trampoline visuals" loading="lazy" />
-                    <h3>Tricking & Movement</h3>
-                    <p>Motion, control, and creativity — the core of Dali’s
-                        craft. Watch progress and highlights from the
-                        journey.</p>
-                    <a href="projects.html" class="card-link">View</a>
-                </div>
+            <div class="hero-right">
+                <div class="gradient-motion"></div>
+            </div>
+        </section>
 
-                <div class="card">
-                    <img src="assets/placeholder.png"
-                        alt="Tricking 0 maps preview" loading="lazy" />
-                    <h3>Tricking 0 Maps</h3>
-                    <p>Custom maps and worlds built for the community. Explore
-                        the expanding universe of Tricking 0.</p>
-                    <a href="maps.html" class="card-link">Open</a>
-                </div>
+        <!-- Verse Overview -->
+        <section class="verse-overview">
+            <h2>The Dali Verse</h2>
+            <p>Built from motion and creativity — this is where digital design
+                meets physical flow. Tricking, cliff diving, and artistry
+                collide in a universe shaped by energy and rhythm.</p>
 
-                <div class="card">
-                    <img src="assets/placeholder.png" alt="Community projects"
-                        loading="lazy" />
-                    <h3>Community & Management</h3>
-                    <p>Creating spaces where movement meets connection. Learn
-                        how Dali builds and sustains vibrant communities.</p>
-                    <a href="projects.html" class="card-link">Read More</a>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <h3>Tricking 0</h3>
+                    <p>The game that started it all — blending martial arts,
+                        acrobatics, and physics into an art form. Explore maps,
+                        updates, and the movement that powers it.</p>
                 </div>
-            </section>
+                <div class="overview-card">
+                    <h3>Creation & Design</h3>
+                    <p>From clips to maps to visuals — everything you see here
+                        is a crafted piece of the Verse, built to express motion
+                        and emotion through digital art.</p>
+                </div>
+                <div class="overview-card">
+                    <h3>Community Energy</h3>
+                    <p>A growing network of creators, movers, and dreamers — all
+                        building something larger than themselves. This is
+                        movement as a lifestyle.</p>
+                </div>
+            </div>
+        </section>
 
-            <section class="about" data-aos="fade-right">
-                <div class="about-text">
-                    <h2>About Dali</h2>
-                    <p>I’m Dali — a tricker and digital creator blending
-                        athletic precision with creative energy. From trampoline
-                        parks to virtual worlds, I design spaces where movement
-                        thrives. Dali Verse connects all of it: performance,
-                        maps, and the ever-evolving Tricking 0 project.</p>
-                    <p>What started as flips turned into a universe. Every spin,
-                        every map, every project expands this verse — welcome
-                        aboard.</p>
-                </div>
-                <div class="about-img">
-                    <img src="assets/Dali1.jpg" alt="Portrait of Dali"
-                        loading="lazy" />
-                </div>
-            </section>
-        </main>
-
+        <!-- Footer -->
         <footer class="footer">
-            <p>© <span id="year"></span> Dali Verse. All rights reserved.</p>
+            <p>© 2025 Dali Verse — Designed and built by Dali</p>
         </footer>
 
-        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
         <script src="js/main.js"></script>
-        <script>
-    AOS.init({ once: true, duration: 800 });
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
     </body>
 </html>

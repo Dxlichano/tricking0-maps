@@ -1,5 +1,5 @@
 /* ======================================================
-   Dali Verse — Unified Stylesheet (Enhanced)
+   Dali Verse — Unified Stylesheet (Full + Homepage Hero)
    ====================================================== */
 
 :root {
@@ -155,8 +155,6 @@ body {
   color: #a5c7ff;
   margin-bottom: 2rem;
 }
-
-/* BUTTONS */
 .btn {
   background: var(--accent);
   color: #000;
@@ -176,24 +174,95 @@ body {
   border: 1px solid var(--accent);
 }
 
-/* UNIVERSAL BANNER */
-.banner {
-  height: 250px;
+/* SPLIT HERO */
+.split-hero {
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
-  border-bottom: 1px solid var(--border-color);
-  margin-top: 60px;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 80px;
 }
-.banner h1 {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  text-shadow: var(--accent-glow);
+.hero-left,
+.hero-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+.hero-right {
+  overflow: hidden;
+}
+.gradient-motion {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 30% 30%,
+      var(--accent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(circle at 70% 70%, var(--accent) 0%, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: pulseMotion 6s ease-in-out infinite alternate;
+}
+@keyframes pulseMotion {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.2) translate(-5%, -5%);
+    opacity: 0.6;
+  }
+}
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 
-/* PROJECTS PAGE */
+/* VERSE OVERVIEW */
+.verse-overview {
+  text-align: center;
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.verse-overview h2 {
+  font-family: var(--font-display);
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.verse-overview p {
+  color: #cbd6ff;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.overview-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: var(--transition);
+}
+.overview-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--accent-glow);
+}
+.overview-card h3 {
+  font-family: var(--font-display);
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* PROJECTS */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -230,7 +299,7 @@ body {
   line-height: 1.5;
 }
 
-/* MAPS PAGE */
+/* MAPS */
 .maps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -278,7 +347,7 @@ body {
   padding: 0.6rem 1.2rem;
 }
 
-/* SOCIALS PAGE */
+/* SOCIALS */
 .socials-cards,
 .socials-grid {
   display: grid;
@@ -315,7 +384,6 @@ body {
   color: #cbd6ff;
   font-size: 0.9rem;
 }
-
 .socials-grid .social-card {
   display: flex;
   align-items: center;
@@ -331,7 +399,7 @@ body {
   display: none;
 }
 
-/* ABOUT SECTION */
+/* ABOUT */
 .about-section {
   display: flex;
   flex-wrap: wrap;
@@ -401,6 +469,17 @@ body.motion-fx .cursor-glow {
   }
   .banner h1 {
     font-size: 1.8rem;
+  }
+  .split-hero {
+    flex-direction: column;
+  }
+  .hero-left,
+  .hero-right {
+    flex: unset;
+    width: 100%;
+  }
+  .gradient-motion {
+    height: 300px;
   }
   .projects-grid,
   .maps-grid,
