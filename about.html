@@ -1,1 +1,83 @@
-About Dali page placeholder
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About Dali — Dali Verse</title>
+        <meta name="description"
+            content="Learn about Dali — tricker, athlete, and creator of Tricking 0. The story behind Dali Verse." />
+
+        <link rel="stylesheet"
+            href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" href="assets/logo.png" />
+    </head>
+    <body class="theme-dark">
+        <nav class="nav" aria-label="Main Navigation">
+            <div class="nav-left">
+                <img src="assets/logo.png" alt="Dali Verse logo" class="logo" />
+                <a class="brand" href="index.html">Dali Verse</a>
+            </div>
+            <div class="nav-right">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="maps.html">Maps</a>
+                <a href="socials.html">Socials</a>
+                <button id="themeToggle" class="theme-toggle"
+                    title="Switch Theme">✨</button>
+            </div>
+        </nav>
+
+        <!-- Simple Banner -->
+        <header class="banner" data-aos="fade-down">
+            <h1>About Dali</h1>
+        </header>
+
+        <main class="about-page" data-aos="fade-up">
+            <section class="about-section">
+                <div class="about-text">
+                    <h2>Hey, I'm Dali.</h2>
+                    <p>I started tricking after spending a lot of time at
+                        trampoline parks — just having fun flipping around.
+                        That’s where I found my love for movement. It wasn’t
+                        long before I wanted to push things further: learning
+                        more complex tricks, combining flips and kicks, and
+                        eventually getting into the wider world of tricking.</p>
+
+                    <p>After an injury, I needed a new way to stay creative and
+                        connected to the scene. That’s when I started building
+                        **Tricking 0**, a game and community where people can
+                        share spots, maps, and videos — keeping that same energy
+                        alive, even when we can’t train in real life.</p>
+
+                    <p>Dali Verse is just me putting it all together: the
+                        training, the game, the maps, and the people. It’s my
+                        little universe for everything I make and everyone who’s
+                        been part of this journey.</p>
+
+                    <p>If you’re here, thanks for stopping by. Check out the
+                        maps, see the projects, or just look around — it’s all
+                        connected.</p>
+                </div>
+                <div class="about-gallery">
+                    <img src="assets/Dali1.jpg" alt="Dali portrait"
+                        loading="lazy" />
+                    <img src="assets/placeholder.png" alt="Dali in motion"
+                        loading="lazy" />
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© <span id="year"></span> Dali Verse. All rights reserved.</p>
+        </footer>
+
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+    AOS.init({ once: true, duration: 800 });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+    </body>
+</html>
