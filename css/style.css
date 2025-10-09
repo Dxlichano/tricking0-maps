@@ -119,6 +119,33 @@ body.theme-solar {
 .theme-toggle:hover {
   background: rgba(255, 255, 255, 0.15);
 }
+/* Logo styling */
+.nav-logo {
+  height: 36px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.nav-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 10px #ff4fa0);
+}
+
+.hero-logo {
+  width: 160px;
+  max-width: 70%;
+  height: auto;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+  animation: fadeSlide 1.4s ease forwards;
+}
+
+.footer-logo {
+  width: 60px;
+  height: auto;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
 
 /* ======================================================
    Hero Section
