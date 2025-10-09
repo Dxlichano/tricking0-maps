@@ -5,146 +5,93 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dali Verse</title>
         <link rel="stylesheet" href="css/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;500&display=swap"
+            rel="stylesheet">
     </head>
-    <body class="theme-dark-neon">
+    <body class="theme-gradient">
 
-        <!-- NAV -->
+        <!-- Navigation -->
         <nav class="nav">
             <a href="#hero" class="brand">Dali Verse</a>
             <div class="nav-right">
-                <a href="#projects">Projects</a>
                 <a href="#maps">Maps</a>
+                <a href="#projects">Projects</a>
                 <a href="#about">About</a>
-                <a href="#socials">Socials</a>
-                <button id="themeToggle" class="theme-toggle">☰</button>
+                <button id="themeToggle" class="theme-toggle">☀ / ☾</button>
             </div>
         </nav>
 
-        <!-- HERO -->
-        <header id="hero" class="hero-banner">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
             <div class="hero-overlay"></div>
-            <div class="hero-center">
-                <h1 class="hero-title">Dali Verse</h1>
-                <p class="hero-subtitle">Movement meets creation</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn">Explore Projects</a>
-                    <a href="#maps" class="btn btn-ghost">View Maps</a>
-                </div>
-                <div class="scroll-indicator"></div>
+            <div class="hero-content">
+                <h1>Dali Verse</h1>
+                <p>Movement meets creation</p>
             </div>
-        </header>
-
-        <!-- PROJECTS -->
-        <section id="projects" class="section fade-up">
-            <h2>Projects</h2>
-            <p>Creative work from across the Verse — where movement, visuals,
-                and imagination collide.</p>
-            <div class="projects-grid">
-                <div class="project-card fade-pop">
-                    <img src="assets/placeholder.png" alt="Project image" />
-                    <h3>Visual Experiments</h3>
-                    <p>Motion-inspired designs and kinetic studies from the
-                        Tricking 0 universe.</p>
-                </div>
-                <div class="project-card fade-pop">
-                    <img src="assets/placeholder.png" alt="Project image" />
-                    <h3>Community Concepts</h3>
-                    <p>Creative direction, event design, and visual identity
-                        shaping for the community.</p>
-                </div>
-            </div>
+            <div class="scroll-indicator"></div>
         </section>
 
-        <!-- MAPS -->
-        <section id="maps" class="section slide-left">
+        <!-- Maps Section -->
+        <section id="maps" class="section">
             <h2>Maps</h2>
-            <p>Community-made spaces designed for flow and creative exploration
-                in Tricking 0.</p>
-            <div class="maps-grid">
-                <div class="map-card slide-right">
-                    <img src="assets/placeholder.png" alt="Map preview" />
+            <div class="map-card">
+                <img src="assets/Axora-preview.jpg" alt="Axora Map Preview">
+                <div class="map-info">
                     <h3>Tropical Axora</h3>
-                    <p>An ocean-side paradise built for motion and
-                        imagination.</p>
-                    <div class="map-buttons">
-                        <a href="downloads/tropical-axora.zip"
-                            class="btn">Download</a>
-                    </div>
-                </div>
-                <div class="map-card slide-right">
-                    <img src="assets/placeholder.png" alt="Map preview" />
-                    <h3>Urban Flow</h3>
-                    <p>City rooftops transformed into a playground of rhythm and
-                        creativity.</p>
-                    <div class="map-buttons">
-                        <a href="downloads/urban-flow.zip"
-                            class="btn">Download</a>
-                    </div>
+                    <p>Where flow meets the ocean breeze — a realm of motion and
+                        calm.</p>
+                    <a href="downloads/Axora.zip" class="btn">Download Map</a>
                 </div>
             </div>
         </section>
-        <!-- ABOUT -->
-        <section id="about" class="about-section">
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2>Projects</h2>
+            <p class="section-description">
+                A collection of my creative projects — exploring motion, digital
+                art, and the expanding Daliverse.
+            </p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Tricking 0</h3>
+                    <p>Creative direction, visual storytelling, and community
+                        energy around the Tricking 0 universe.</p>
+                </div>
+                <div class="project-card placeholder"><h3>Coming Soon</h3></div>
+                <div class="project-card placeholder"><h3>Coming Soon</h3></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
             <div class="about-content">
+                <div class="about-image">
+                    <img src="assets/Dali1.jpg" alt="Dali portrait">
+                </div>
                 <div class="about-text">
-                    <h2>About Dali</h2>
+                    <h2>About Me</h2>
                     <p>I’m Dali — community manager and creative mind within the
                         Tricking 0 universe.
-                        I help shape its visual and community identity through
-                        motion, storytelling, and creative direction.</p>
-                    <p>Dali Verse is my creative space — a reflection of art,
-                        movement, and collaboration.</p>
-                </div>
-                <div class="about-image">
-                    <img src="assets/Dali1.jpg" alt="Dali portrait" />
+                        I help shape its creative energy, design, and community
+                        voice.
+                        Daliverse is my creative hub — where movement, design,
+                        and imagination collide.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">Discord</a>
+                        <a href="#" class="social-icon">YouTube</a>
+                        <a href="#" class="social-icon">Instagram</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SOCIALS -->
-        <section id="socials" class="section fade-zoom">
-            <h2>Connect</h2>
-            <p>Join the movement — find me and the Tricking 0 community across
-                the digital realm.</p>
-            <div class="socials-cards">
-                <div class="social-card fade-pop"><img
-                        src="assets/placeholder.png"
-                        alt="Discord" /><h3>Discord</h3></div>
-                <div class="social-card fade-pop"><img
-                        src="assets/placeholder.png"
-                        alt="YouTube" /><h3>YouTube</h3></div>
-                <div class="social-card fade-pop"><img
-                        src="assets/placeholder.png"
-                        alt="Instagram" /><h3>Instagram</h3></div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
+        <!-- Footer -->
         <footer class="footer">
-            <p>© 2025 Dali Verse — Designed and Built by Dali</p>
+            <p>© 2025 Dali Verse — Designed by Dali</p>
         </footer>
 
         <script src="js/main.js"></script>
-        <script>
-  // --- Section animation triggers ---
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
-    });
-  },{threshold:0.2});
-  document.querySelectorAll('.section, .project-card, .map-card, .social-card').forEach(el=>observer.observe(el));
-
-  // --- Hero title reveal sequence ---
-  window.addEventListener('load', ()=>{
-    const title = document.querySelector('.hero-title');
-    const subtitle = document.querySelector('.hero-subtitle');
-    const buttons = document.querySelector('.hero-buttons');
-    setTimeout(()=>title.classList.add('visible'),300);
-    setTimeout(()=>subtitle.classList.add('visible'),900);
-    setTimeout(()=>buttons.classList.add('visible'),1500);
-  });
-  </script>
     </body>
 </html>

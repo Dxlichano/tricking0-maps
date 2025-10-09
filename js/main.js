@@ -1,54 +1,34 @@
 /* =====================================================
-   Dali Verse - Main JS (Cinematic Single Page)
+   Dali Verse — Main JS (Cinematic Minimal)
    ===================================================== */
 
-// THEME HANDLING
+// THEME SYSTEM
+const body = document.body;
 const themeToggle = document.getElementById("themeToggle");
-const themes = [
-  "theme-dark-neon",
-  "theme-violet",
-  "theme-cyberblue",
-  "theme-solarflare",
-  "theme-nebula",
-];
+const themes = ["theme-gradient", "theme-dark", "theme-light"];
 let currentTheme = 0;
 
 // Load saved theme
 const savedTheme = localStorage.getItem("dali-theme");
 if (savedTheme && themes.includes(savedTheme)) {
-  document.body.className = savedTheme;
+  body.className = savedTheme;
   currentTheme = themes.indexOf(savedTheme);
+} else {
+  body.className = "theme-gradient";
 }
 
-// Theme cycle on click
+// Cycle theme on click
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    document.body.classList.remove(themes[currentTheme]);
+    body.classList.remove(themes[currentTheme]);
     currentTheme = (currentTheme + 1) % themes.length;
-    document.body.classList.add(themes[currentTheme]);
+    body.classList.add(themes[currentTheme]);
     localStorage.setItem("dali-theme", themes[currentTheme]);
   });
 }
 
-// NAVIGATION ACTIVE LINK ON SCROLL
+// SMOOTH SCROLLING
 const navLinks = document.querySelectorAll(".nav-right a");
-const sections = document.querySelectorAll("section, header");
-
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach((sec) => {
-    const sectionTop = sec.offsetTop - 150;
-    if (scrollY >= sectionTop) current = sec.getAttribute("id");
-  });
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${current}`) {
-      link.classList.add("active");
-    }
-  });
-});
-
-// OPTIONAL: SMOOTH SCROLLING
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -62,23 +42,16 @@ navLinks.forEach((link) => {
   });
 });
 
-// CLEAN MOTION FX HANDLING (DISABLED BUT READY)
-let motionFXEnabled = false; // Currently off
-const cursorGlow = document.createElement("div");
-cursorGlow.classList.add("cursor-glow");
-document.body.appendChild(cursorGlow);
+// HERO FADE ON SCROLL
+window.addEventListener("scroll", () => {
+  const hero = document.querySelector(".hero");
+  const scrollY = window.scrollY;
+  const heroHeight = hero.offsetHeight;
 
-if (motionFXEnabled) {
-  window.addEventListener("mousemove", (e) => {
-    cursorGlow.style.transform = `translate(${e.clientX - 10}px, ${
-      e.clientY - 10
-    }px)`;
-  });
-} else {
-  cursorGlow.style.display = "none";
-}
-
-// FUTURE-READY: HERO PARTICLES OR AUDIO CAN BE ADDED HERE
-// Example placeholder for later expansion:
-// function initParticles() { /* particle code here */ }
-// function toggleAudio() { /* ambient sound control here */ }
+  // When scrolled past 20% of hero, start fading
+  if (scrollY > heroHeight * 0.2) {
+    body.classList.add("scrolled");
+  } else {
+    body.classList.remove("scrolled");
+  }
+});
