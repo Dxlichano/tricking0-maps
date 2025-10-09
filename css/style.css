@@ -127,7 +127,7 @@ body.theme-light {
    ====================================================== */
 .hero {
   height: 100vh;
-  background: url("../assets/Dub full.jpg") center/cover no-repeat;
+  background: url("../assets/doubefull.jpg") center/cover no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
