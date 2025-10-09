@@ -10,69 +10,159 @@
 
         <!-- Navigation -->
         <nav class="nav">
-            <a href="index.html" class="brand">Dali Verse</a>
+            <a href="#hero" class="brand">Dali Verse</a>
             <div class="nav-right">
-                <a href="projects.html">Projects</a>
-                <a href="maps.html">Maps</a>
-                <a href="about.html">About</a>
-                <a href="socials.html">Socials</a>
+                <a href="#projects">Projects</a>
+                <a href="#maps">Maps</a>
+                <a href="#about">About</a>
+                <a href="#socials">Socials</a>
                 <button id="themeToggle" class="theme-toggle">☰</button>
             </div>
         </nav>
 
-        <!-- Hero Section -->
-        <section class="hero split-hero">
+        <!-- HERO -->
+        <section id="hero" class="hero split-hero">
             <div class="hero-left">
                 <div class="hero-content">
                     <h1>Movement meets creation</h1>
-                    <p class="lead">Welcome to the Dali Verse — where art,
-                        motion, and imagination collide.</p>
+                    <p class="lead">Welcome to the Dali Verse — where motion,
+                        art, and imagination converge.</p>
                     <div class="hero-buttons">
-                        <a href="projects.html" class="btn">Explore Projects</a>
-                        <a href="maps.html" class="btn btn-ghost">View Maps</a>
+                        <a href="#projects" class="btn">Explore Projects</a>
+                        <a href="#maps" class="btn btn-ghost">View Maps</a>
                     </div>
                 </div>
             </div>
 
             <div class="hero-right">
                 <div class="gradient-motion"></div>
+                <canvas id="soundwave"></canvas>
             </div>
         </section>
 
-        <!-- Verse Overview -->
-        <section class="verse-overview">
-            <h2>The Dali Verse</h2>
-            <p>Built from motion and creativity — this is where digital design
-                meets physical flow. Tricking, cliff diving, and artistry
-                collide in a universe shaped by energy and rhythm.</p>
-
-            <div class="overview-grid">
-                <div class="overview-card">
-                    <h3>Tricking 0</h3>
-                    <p>The game that started it all — blending martial arts,
-                        acrobatics, and physics into an art form. Explore maps,
-                        updates, and the movement that powers it.</p>
+        <!-- PROJECTS -->
+        <section id="projects" class="verse-overview">
+            <h2>Projects</h2>
+            <p>Creative works from across the Verse — blending digital art,
+                motion, and imagination.</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="assets/placeholder.png" alt="Project image">
+                    <h3>Visual Experiments</h3>
+                    <p>Designs and motion studies inspired by the energy of
+                        Tricking 0 and beyond.</p>
                 </div>
-                <div class="overview-card">
-                    <h3>Creation & Design</h3>
-                    <p>From clips to maps to visuals — everything you see here
-                        is a crafted piece of the Verse, built to express motion
-                        and emotion through digital art.</p>
-                </div>
-                <div class="overview-card">
-                    <h3>Community Energy</h3>
-                    <p>A growing network of creators, movers, and dreamers — all
-                        building something larger than themselves. This is
-                        movement as a lifestyle.</p>
+                <div class="project-card">
+                    <img src="assets/placeholder.png" alt="Project image">
+                    <h3>Community Concepts</h3>
+                    <p>Creative direction, visuals, and event work within the
+                        Tricking 0 community.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
+        <!-- MAPS -->
+        <section id="maps" class="verse-overview">
+            <h2>Maps</h2>
+            <p>Community-made maps and creative spaces for Tricking 0 — designed
+                to challenge and inspire.</p>
+            <div class="maps-grid">
+                <div class="map-card">
+                    <img src="assets/placeholder.png" alt="Map preview">
+                    <h3>Tropical Axora</h3>
+                    <p>An ocean-side paradise built for flow and creativity.</p>
+                    <div class="map-buttons">
+                        <a href="downloads/tropical-axora.zip"
+                            class="btn">Download</a>
+                    </div>
+                </div>
+                <div class="map-card">
+                    <img src="assets/placeholder.png" alt="Map preview">
+                    <h3>Urban Flow</h3>
+                    <p>City rooftops reimagined for movement and rhythm.</p>
+                    <div class="map-buttons">
+                        <a href="downloads/urban-flow.zip"
+                            class="btn">Download</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="about-section">
+            <div class="about-text">
+                <h2>About Dali</h2>
+                <p>I’m Dali — community manager and creative mind within the
+                    Tricking 0 universe.
+                    I bridge the gap between art, movement, and digital
+                    storytelling — helping shape the energy, visuals, and
+                    atmosphere that bring our community to life.</p>
+                <p>Dali Verse is my creative space — a digital reflection of
+                    motion, art, and collaboration.</p>
+            </div>
+            <div class="about-gallery">
+                <img src="assets/Dali1.jpg" alt="Dali portrait">
+            </div>
+        </section>
+
+        <!-- SOCIALS -->
+        <section id="socials" class="verse-overview">
+            <h2>Connect</h2>
+            <p>Join the movement — find me and the Tricking 0 community across
+                the digital realm.</p>
+            <div class="socials-cards">
+                <div class="social-card">
+                    <img src="assets/placeholder.png" alt="Discord">
+                    <h3>Discord</h3>
+                    <p>Where the Tricking 0 community gathers and creates.</p>
+                </div>
+                <div class="social-card">
+                    <img src="assets/placeholder.png" alt="YouTube">
+                    <h3>YouTube</h3>
+                    <p>Visual storytelling through motion, music, and
+                        creation.</p>
+                </div>
+                <div class="social-card">
+                    <img src="assets/placeholder.png" alt="Instagram">
+                    <h3>Instagram</h3>
+                    <p>Snapshots of life, training, and the Verse.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
         <footer class="footer">
             <p>© 2025 Dali Verse — Designed and built by Dali</p>
         </footer>
 
         <script src="js/main.js"></script>
+        <script>
+    // Minimal dynamic wave animation for hero background
+    const canvas = document.getElementById('soundwave');
+    const ctx = canvas.getContext('2d');
+    let w, h, t = 0;
+    function resize() {
+      w = canvas.width = window.innerWidth / 2;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const y = h/2 + Math.sin(x * 0.01 + t) * 40 + Math.sin(x * 0.02 + t/2) * 20;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'rgba(0,255,255,0.3)';
+      ctx.lineWidth = 2;
+      ctx.shadowColor = 'rgba(0,255,255,0.5)';
+      ctx.shadowBlur = 10;
+      ctx.stroke();
+      t += 0.05;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
     </body>
 </html>
