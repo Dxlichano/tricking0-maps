@@ -1,125 +1,84 @@
-// ======================================================
-// Dali Verse — Main Script
-// Handles theme switching, dropdown controls, and motion FX
-// ======================================================
+/* =====================================================
+   Dali Verse - Main JS (Cinematic Single Page)
+   ===================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const themeToggle = document.getElementById("themeToggle");
-  const body = document.body;
+// THEME HANDLING
+const themeToggle = document.getElementById("themeToggle");
+const themes = [
+  "theme-dark-neon",
+  "theme-violet",
+  "theme-cyberblue",
+  "theme-solarflare",
+  "theme-nebula",
+];
+let currentTheme = 0;
 
-  // Dropdown creation
-  const dropdown = document.createElement("div");
-  dropdown.classList.add("dropdown");
-  dropdown.innerHTML = `
-    <button class="dropdown-item" id="cycleTheme">Cycle Theme</button>
-    <button class="dropdown-item" id="toggleFX">Toggle Motion FX</button>
-  `;
-  themeToggle.insertAdjacentElement("afterend", dropdown);
+// Load saved theme
+const savedTheme = localStorage.getItem("dali-theme");
+if (savedTheme && themes.includes(savedTheme)) {
+  document.body.className = savedTheme;
+  currentTheme = themes.indexOf(savedTheme);
+}
 
-  const dropdownItems = dropdown.querySelectorAll(".dropdown-item");
-  let dropdownOpen = false;
-
-  // Themes list
-  const themes = [
-    "theme-dark-neon",
-    "theme-violet",
-    "theme-cyberblue",
-    "theme-solarflare",
-    "theme-nebula",
-  ];
-  let currentTheme = localStorage.getItem("theme") || "theme-dark-neon";
-  body.classList.add(currentTheme);
-
-  // Motion FX setup
-  let fxEnabled = localStorage.getItem("motionFX") === "true";
-  let cursorGlow = null;
-
-  const enableFX = () => {
-    if (cursorGlow) return;
-    cursorGlow = document.createElement("div");
-    cursorGlow.classList.add("cursor-glow");
-    body.appendChild(cursorGlow);
-
-    window.addEventListener("mousemove", (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX - 10}px, ${
-        e.clientY - 10
-      }px)`;
-    });
-
-    body.classList.add("motion-fx");
-  };
-
-  const disableFX = () => {
-    if (cursorGlow) {
-      cursorGlow.remove();
-      cursorGlow = null;
-    }
-    body.classList.remove("motion-fx");
-  };
-
-  if (fxEnabled) enableFX();
-
-  // Toggle dropdown visibility
+// Theme cycle on click
+if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    dropdownOpen = !dropdownOpen;
-    dropdown.style.display = dropdownOpen ? "flex" : "none";
+    document.body.classList.remove(themes[currentTheme]);
+    currentTheme = (currentTheme + 1) % themes.length;
+    document.body.classList.add(themes[currentTheme]);
+    localStorage.setItem("dali-theme", themes[currentTheme]);
   });
+}
 
-  // Dropdown actions
-  dropdown.querySelector("#cycleTheme").addEventListener("click", () => {
-    const currentIndex = themes.indexOf(currentTheme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    body.classList.remove(currentTheme);
-    currentTheme = themes[nextIndex];
-    body.classList.add(currentTheme);
-    localStorage.setItem("theme", currentTheme);
+// NAVIGATION ACTIVE LINK ON SCROLL
+const navLinks = document.querySelectorAll(".nav-right a");
+const sections = document.querySelectorAll("section, header");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach((sec) => {
+    const sectionTop = sec.offsetTop - 150;
+    if (scrollY >= sectionTop) current = sec.getAttribute("id");
   });
-
-  dropdown.querySelector("#toggleFX").addEventListener("click", () => {
-    fxEnabled = !fxEnabled;
-    localStorage.setItem("motionFX", fxEnabled);
-    if (fxEnabled) enableFX();
-    else disableFX();
-  });
-
-  // Hide dropdown when clicking elsewhere
-  document.addEventListener("click", (e) => {
-    if (!themeToggle.contains(e.target) && !dropdown.contains(e.target)) {
-      dropdown.style.display = "none";
-      dropdownOpen = false;
+  navLinks.forEach((link) => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
     }
   });
-
-  // Basic dropdown styling injection
-  const style = document.createElement("style");
-  style.textContent = `
-    .dropdown {
-      display: none;
-      position: absolute;
-      right: 2rem;
-      top: 3.5rem;
-      background: rgba(10, 10, 15, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-      flex-direction: column;
-      z-index: 1000;
-    }
-    .dropdown-item {
-      padding: 0.6rem 1rem;
-      color: var(--text-color);
-      background: none;
-      border: none;
-      text-align: left;
-      cursor: pointer;
-      transition: 0.2s;
-      font-family: var(--font-body);
-    }
-    .dropdown-item:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--accent);
-      text-shadow: var(--accent-glow);
-    }
-  `;
-  document.head.appendChild(style);
 });
+
+// OPTIONAL: SMOOTH SCROLLING
+navLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop - 60,
+        behavior: "smooth",
+      });
+    }
+  });
+});
+
+// CLEAN MOTION FX HANDLING (DISABLED BUT READY)
+let motionFXEnabled = false; // Currently off
+const cursorGlow = document.createElement("div");
+cursorGlow.classList.add("cursor-glow");
+document.body.appendChild(cursorGlow);
+
+if (motionFXEnabled) {
+  window.addEventListener("mousemove", (e) => {
+    cursorGlow.style.transform = `translate(${e.clientX - 10}px, ${
+      e.clientY - 10
+    }px)`;
+  });
+} else {
+  cursorGlow.style.display = "none";
+}
+
+// FUTURE-READY: HERO PARTICLES OR AUDIO CAN BE ADDED HERE
+// Example placeholder for later expansion:
+// function initParticles() { /* particle code here */ }
+// function toggleAudio() { /* ambient sound control here */ }
