@@ -1,13 +1,12 @@
 /* ======================================================
-   Dali Verse — Futuristic Theme Stylesheet
-   Designed for dark-neon default theme with smooth glow
+   Dali Verse — Unified Stylesheet
+   Dark-futuristic design with themes, grids, banners, and glow polish
    ====================================================== */
 
 :root {
   --font-body: "Poppins", sans-serif;
   --font-display: "Orbitron", sans-serif;
 
-  /* Default (Dark Neon) */
   --bg-color: #0a0a0f;
   --bg-gradient: linear-gradient(120deg, #0a0a0f 0%, #111122 100%);
   --text-color: #e6f6ff;
@@ -15,42 +14,35 @@
   --accent-glow: 0 0 15px rgba(0, 255, 255, 0.6);
   --card-bg: rgba(255, 255, 255, 0.05);
   --border-color: rgba(255, 255, 255, 0.08);
-
   --transition: 0.3s ease;
 }
 
-/* THEME VARIANTS */
 body.theme-dark-neon {
   --bg-color: #0a0a0f;
   --accent: #00ffff;
   --accent-glow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
-
 body.theme-violet {
   --bg-color: #0b0211;
   --accent: #b46aff;
   --accent-glow: 0 0 15px rgba(180, 106, 255, 0.6);
 }
-
 body.theme-cyberblue {
   --bg-color: #010a1a;
   --accent: #40a9ff;
   --accent-glow: 0 0 20px rgba(64, 169, 255, 0.7);
 }
-
 body.theme-solarflare {
   --bg-color: #1a0b00;
   --accent: #ff9100;
   --accent-glow: 0 0 20px rgba(255, 145, 0, 0.7);
 }
-
 body.theme-nebula {
   --bg-color: #050014;
   --accent: #ff4ffb;
   --accent-glow: 0 0 25px rgba(255, 79, 251, 0.7);
 }
 
-/* Base Reset */
 * {
   margin: 0;
   padding: 0;
@@ -84,33 +76,27 @@ body {
   border-bottom: 1px solid var(--border-color);
   z-index: 999;
 }
-
 .logo {
   height: 40px;
   width: auto;
 }
-
 .brand {
   font-family: var(--font-display);
   font-size: 1.4rem;
   color: var(--accent);
   text-decoration: none;
   text-shadow: var(--accent-glow);
-  transition: var(--transition);
 }
-
 .nav-right a {
   color: var(--text-color);
   margin-left: 1rem;
   text-decoration: none;
   transition: var(--transition);
 }
-
 .nav-right a:hover {
   color: var(--accent);
   text-shadow: var(--accent-glow);
 }
-
 .theme-toggle {
   margin-left: 1.5rem;
   background: none;
@@ -122,7 +108,6 @@ body {
   font-size: 1.2rem;
   transition: var(--transition);
 }
-
 .theme-toggle:hover {
   box-shadow: var(--accent-glow);
 }
@@ -135,14 +120,13 @@ body {
   align-items: center;
   text-align: center;
   position: relative;
-  overflow: hidden;
   background: radial-gradient(
     circle at center,
     rgba(0, 255, 255, 0.05),
     transparent 70%
   );
+  overflow: hidden;
 }
-
 .hero::before {
   content: "";
   position: absolute;
@@ -158,7 +142,6 @@ body {
   opacity: 0.05;
   animation: floatGradient 10s ease-in-out infinite alternate;
 }
-
 @keyframes floatGradient {
   from {
     transform: translate(-10%, -10%) scale(1.1);
@@ -167,20 +150,16 @@ body {
     transform: translate(10%, 10%) scale(1.2);
   }
 }
-
 .hero-content h1 {
   font-family: var(--font-display);
   font-size: 3rem;
-  margin-bottom: 1rem;
   text-shadow: var(--accent-glow);
 }
-
 .hero-content .lead {
   font-size: 1.2rem;
   color: #a5c7ff;
   margin-bottom: 2rem;
 }
-
 .btn {
   background: var(--accent);
   color: #000;
@@ -190,29 +169,49 @@ body {
   font-weight: bold;
   transition: var(--transition);
 }
-
 .btn:hover {
   box-shadow: var(--accent-glow);
   transform: translateY(-2px);
 }
-
 .btn-ghost {
   background: transparent;
   color: var(--accent);
   border: 1px solid var(--accent);
 }
 
-/* CARDS */
-.cards {
+/* UNIVERSAL BANNER */
+.banner {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
+  border-bottom: 1px solid var(--border-color);
+  margin-top: 60px;
+}
+.banner h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  text-shadow: var(--accent-glow);
+}
+
+/* GRID SECTIONS */
+.cards,
+.projects-grid,
+.maps-grid,
+.socials-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
-
-.card {
+.card,
+.project-card,
+.map-card,
+.social-card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -220,32 +219,51 @@ body {
   text-align: center;
   transition: var(--transition);
 }
-
-.card img {
+.card img,
+.project-card img,
+.map-card img,
+.social-card img {
   width: 100%;
   border-radius: 10px;
   margin-bottom: 1rem;
 }
-
-.card:hover {
+.card:hover,
+.project-card:hover,
+.map-card:hover,
+.social-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--accent-glow);
 }
 
-.card-link {
-  display: inline-block;
-  margin-top: 1rem;
+/* PROJECTS */
+.projects-grid .project-info {
+  text-align: left;
+}
+.project-info h3 {
   color: var(--accent);
-  text-decoration: none;
-  font-weight: bold;
-  transition: var(--transition);
+  margin-bottom: 0.5rem;
+}
+.project-info p {
+  color: #cbd6ff;
+  line-height: 1.6;
 }
 
-.card-link:hover {
-  text-shadow: var(--accent-glow);
+/* MAPS */
+.map-info {
+  text-align: left;
+}
+.map-info h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.map-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-/* ABOUT */
+/* ABOUT PAGE */
+.about-section,
 .about {
   display: flex;
   flex-wrap: wrap;
@@ -256,27 +274,60 @@ body {
   max-width: 1100px;
   margin: 0 auto;
 }
-
 .about-text {
   flex: 1 1 400px;
 }
-
 .about-text h2 {
   font-family: var(--font-display);
   color: var(--accent);
   margin-bottom: 1rem;
 }
-
 .about-text p {
   line-height: 1.6;
   margin-bottom: 1rem;
   color: #cbd6ff;
 }
-
-.about-img img {
+.about-gallery img {
   width: 320px;
   border-radius: 20px;
   box-shadow: var(--accent-glow);
+  margin: 0.5rem;
+}
+
+/* FIX for large about image */
+.about-left img,
+.about-img img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: var(--accent-glow);
+  object-fit: cover;
+}
+
+/* SOCIALS GRID VARIANT */
+.socials-grid .social-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+}
+.socials-grid .social-card img {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+.socials-grid .social-card h3 {
+  flex-grow: 1;
+  text-align: left;
+  font-size: 1rem;
+}
+.socials-grid .social-card p {
+  display: none;
 }
 
 /* FOOTER */
@@ -288,7 +339,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Optional Motion FX Hook */
+/* OPTIONAL FX */
 body.motion-fx .cursor-glow {
   position: fixed;
   width: 20px;
@@ -300,4 +351,27 @@ body.motion-fx .cursor-glow {
   mix-blend-mode: screen;
   filter: blur(10px);
   transition: transform 0.1s linear;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .banner h1 {
+    font-size: 1.8rem;
+  }
+  .about-gallery img {
+    width: 90%;
+  }
+  .map-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .about-left img,
+  .about-img img {
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
 }
