@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Daliverse</title>
-        <link rel="icon" href="assets/logo.png" />
-        <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daliverse</title>
+    <link rel="icon" href="assets/logo.png" />
+    <style>
     /* ===== RESET & BASE ===== */
     * {
       margin: 0;
@@ -257,111 +257,140 @@
         font-size: 0.8rem;
       }
     }
+/* Remove link styling around project cards */
+a.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.card-link:focus,
+a.card-link:hover {
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+}
+
   </style>
-    </head>
-    <body class="dark">
-        <div class="background"></div>
-        <button class="theme-toggle" id="themeToggle">☀ Light Mode</button>
+  </head>
+  <body class="dark">
+    <div class="background"></div>
+    <button class="theme-toggle" id="themeToggle">☀ Light Mode</button>
 
-        <h1 style="margin-top:3rem; color:var(--pink)">Daliverse Projects</h1>
+    <h1 style="margin-top:3rem; color:var(--pink)">Daliverse Projects</h1>
 
-        <!-- PROJECT CARDS -->
-        <section class="grid-section">
-            <div class="card">
-                <img src="assets/Tricking0.png" alt="Tricking 0 project image">
-                <div class="card-content">
-                    <div class="card-title">Tricking 0</div>
-                    <div class="card-role">Founder & Developer</div>
-                    <p class="card-desc">A dynamic tricking and freerunning
-                        community built around creativity and movement
-                        expression.</p>
-                </div>
+    <!-- PROJECT CARDS -->
+    <section class="grid-section">
+      <a href="https://discord.gg/tricking0" target="_blank"
+        rel="noopener noreferrer"
+        class="card-link">
+        <div class="card">
+          <img src="assets/tricking0.jpg" alt="Tricking 0 project image">
+          <div class="card-content">
+            <div class="card-title">Tricking 0</div>
+            <div class="card-role">Founder & Developer</div>
+            <p class="card-desc">
+              Tricking 0 is a physics-based flipping game that lets you perform
+              tricking combos, parkour lines, and cliff jumps with full control.
+              With an intuitive Flick-It system, seamless transitions, and
+              active ragdoll physics, it delivers the thrill of extreme movement
+              sports, but without risking your neck
+            </p>
+          </div>
+        </div>
+      </a>
+
+      <div class="card">
+        <img src="assets/Mystic Network Logo W Background.png"
+          alt="Mystic Gens project image">
+        <a href="https://discord.gg/mysticgens" target="_blank"
+          rel="noopener noreferrer"
+          class="card-link">
+          <div class="card-content">
+            <div class="card-title">Mystic Gens</div>
+            <div class="card-role">Manager & Developer</div>
+            <p class="card-desc"> High above the clouds, <strong>Mystic
+                Gens</strong> challenges you to turn magic into profit.
+              Upgrade your generators, expand your sky island, and master
+              <em>mining</em>, <em>farming</em>, and <em>fishing</em>
+              to build your fortune before the season ends</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="assets/Exploit Head.png" alt="MHFarm project image">
+          <a href="https://discord.gg/4PGMJ9JTs5" target="_blank"
+            rel="noopener noreferrer"
+            class="card-link">
+            <div class="card-content">
+              <div class="card-title">MHFarm</div>
+              <div class="card-role">Administrator</div>
+              <p class="card-desc"> <strong>MHFarm</strong> is a farming tycoon
+                server on <em>Minehut</em>,
+                set in a <em>plotworld</em> where your goal is to grow, trade,
+                and expand your way to the top before the season ends.</p>
             </div>
-
-            <div class="card">
-                <img src="assets/Mystic Network Logo W Background.png"
-                    alt="Mystic Gens project image">
-                <div class="card-content">
-                    <div class="card-title">Mystic Gens</div>
-                    <div class="card-role">Manager & Developer</div>
-                    <p class="card-desc">A magical-themed experience focused on
-                        innovation, teamwork, and community-driven
-                        progression.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="assets/Exploit Head.png" alt="MHFarm project image">
-                <div class="card-content">
-                    <div class="card-title">MHFarm</div>
-                    <div class="card-role">Developer & Coordinator</div>
-                    <p class="card-desc">A chill survival and management project
-                        bringing balance between fun mechanics and community
-                        creativity.</p>
-                </div>
-            </div>
+          </div>
         </section>
 
         <!-- MAP DOWNLOAD CARDS -->
         <h1 style="margin-top:3rem; color:var(--pink)">Map Downloads</h1>
 
         <section class="grid-section">
-            <div class="card">
-                <img src="assets/soon.png" alt="Placeholder Map 1">
-                <div class="card-content">
-                    <div class="card-title">Placeholder Map</div>
-                    <p class="card-desc">Map description placeholder text —
-                        details about gameplay, terrain, or theme will go
-                        here.</p>
-                    <a href="#" class="download-btn">Download</a>
-                </div>
+          <div class="card">
+            <img src="assets/soon.png" alt="Placeholder Map 1">
+            <div class="card-content">
+              <div class="card-title">Coming Soon</div>
+              <p class="card-desc"> ... </p>
+              <a href="#" class="download-btn">Download</a>
             </div>
+          </div>
 
-            <div class="card">
-                <img src="assets/Axora.png" alt="Axora Map">
-                <div class="card-content">
-                    <div class="card-title">Axora</div>
-                    <p class="card-desc"> Discovered in <strong>2012</strong> by
-                        legendary tricker &amp; cliff diver
-                        <em>Axoria Fonso</em>, the islands of
-                        <strong>Axora</strong> were once wild and untouched.
-                        In <strong>2020</strong>, after a massive investment
-                        from
-                        <strong>Fullin Studios</strong>, Axora transformed into
-                        the paradise you see today —
-                        a hotspot where trickers and divers from around the
-                        world push the limits of movement
-                        against a backdrop of sun, sea, and cliffs.</p>
-                    <a href="assets/maps/Axora.zip" class="download-btn"
-                        download>Download</a>
-                </div>
+          <div class="card">
+            <img src="assets/Axora.png" alt="Axora Map">
+            <div class="card-content">
+              <div class="card-title">Axora</div>
+              <p class="card-desc"> Discovered in <strong>2012</strong> by
+                legendary tricker &amp; cliff diver
+                <em>Axoria Fonso</em>, the islands of
+                <strong>Axora</strong> were once wild and untouched.
+                In <strong>2020</strong>, after a massive investment
+                from
+                <strong>Fullin Studios</strong>, Axora transformed into
+                the paradise you see today —
+                a hotspot where trickers and divers from around the
+                world push the limits of movement
+                against a backdrop of sun, sea, and cliffs.</p>
+              <a href="assets/maps/Axora.zip" class="download-btn"
+                download>Download</a>
             </div>
+          </div>
 
-            <div class="card">
-                <img src="assets/soon.png" alt="Placeholder Map 3">
-                <div class="card-content">
-                    <div class="card-title">Placeholder Map</div>
-                    <p class="card-desc">Map description placeholder text — more
-                        info about the environment or experience will go
-                        here.</p>
-                    <a href="#" class="download-btn">Download</a>
-                </div>
+          <div class="card">
+            <img src="assets/soon.png" alt="Placeholder Map 3">
+            <div class="card-content">
+              <div class="card-title">Coming Soon</div>
+              <p class="card-desc"> ... </p>
+              <a href="#" class="download-btn">Download</a>
             </div>
+          </div>
         </section>
 
         <!-- ABOUT ME -->
         <section class="about">
-            <img src="assets/Dali1.jpg" alt="Dali portrait">
-            <div class="about-text">
-                <h2>Dali</h2>
-                <p>
-                    Martial artist, digital creator, and community builder. I
-                    explore the connection between creativity, movement, and
-                    design—both in the real world and the digital one. The
-                    Daliverse is a collection of my ongoing universes, each
-                    reflecting a different part of that journey.
-                </p>
-            </div>
+          <img src="assets/Dali1.jpg" alt="Dali portrait">
+          <div class="about-text">
+            <h2>Dali</h2>
+            <p>
+              Welcome to my little corner of the <strong>Daliverse</strong>.
+              I’m <strong>Dali</strong>, a 21-year-old <em>Martial Arts
+                Tricker</em> and <em>trampoliner</em>
+              with a love for gaming, creativity, and building communities
+              across Discord and game servers.
+              Check out my <strong>Tricking 0</strong> maps above and see what
+              I’ve been creating!
+            </p>
+          </div>
         </section>
 
         <script>
@@ -386,5 +415,5 @@
       }
     });
   </script>
-    </body>
-</html>
+      </body>
+    </html>
