@@ -3,114 +3,388 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dali Verse</title>
-        <link rel="icon" type="image/png" href="assets/Daliverse2.png" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;500&display=swap"
-            rel="stylesheet">
+        <title>Daliverse</title>
+        <link rel="icon" href="assets/logo.png" />
+        <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      z-index: 0;
+    }
+
+    h1, h2 {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== THEME COLORS ===== */
+    :root {
+      --pink: #ff008c;
+      --pink-light: #ff66b2;
+      --bg-dark: #0d0d0d;
+      --bg-light: #f7f7f7;
+      --text-dark: #fff;
+      --text-light: #222;
+      --card-dark: #141414;
+      --card-light: #fff;
+    }
+
+    body.dark {
+      color: var(--text-dark);
+    }
+
+    body.light {
+      color: var(--text-light);
+    }
+
+    /* ===== BACKGROUND ANIMATION ===== */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, #1a001f, #0d0d0d, #250026, #1a001f);
+      background-size: 300% 300%;
+      z-index: -1;
+      animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body.light .background {
+      background: linear-gradient(120deg, #ffe6f0, #fff, #ffd9ec, #fff);
+      background-size: 300% 300%;
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+      z-index: 999;
+    }
+
+    .theme-toggle:hover {
+      background: var(--pink-light);
+      transform: scale(1.05);
+    }
+
+    /* ===== CARD GRID SHARED STYLE ===== */
+    .grid-section {
+      width: 100%;
+      max-width: 1200px;
+      padding: 4rem 2rem 2rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+    }
+
+    .card {
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 340px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      background-color: var(--card-dark);
+      backdrop-filter: blur(8px);
+    }
+
+    body.light .card {
+      background-color: var(--card-light);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px rgba(255, 0, 140, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.8);
+      transition: filter 0.3s ease;
+    }
+
+    .card:hover img {
+      filter: brightness(1);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      color: var(--pink);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-role {
+      font-size: 0.9rem;
+      color: var(--pink-light);
+      margin-bottom: 0.8rem;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    body.light .card-desc {
+      color: #555;
+    }
+
+    /* ===== MAP DOWNLOAD BUTTON ===== */
+    .download-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: var(--pink);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--pink-light);
+      transform: scale(1.05);
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .about {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      gap: 2rem;
+      background: radial-gradient(circle at top left, rgba(255,0,140,0.2), transparent 70%);
+      border-radius: 12px;
+    }
+
+    body.light .about {
+      background: radial-gradient(circle at top left, rgba(255,0,140,0.1), transparent 70%);
+    }
+
+    .about img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--pink);
+      box-shadow: 0 0 20px rgba(255,0,140,0.3);
+    }
+
+    .about-text {
+      max-width: 500px;
+    }
+
+    .about-text h2 {
+      color: var(--pink);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    body.light .about-text p {
+      color: #444;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .about {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-text h2 {
+        font-size: 1.6rem;
+      }
+
+      .card img {
+        height: 160px;
+      }
+
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
     </head>
-    <body class="theme-gradient">
+    <body class="dark">
+        <div class="background"></div>
+        <button class="theme-toggle" id="themeToggle">☀ Light Mode</button>
 
-        <!-- Navigation -->
-        <nav class="nav">
-            <a href="#hero" class="brand">
-                <img src="assets/Daliverse2.png" alt="Daliverse Logo"
-                    class="nav-logo" />
-            </a>
-            <div class="nav-right">
-                <a href="#maps">Maps</a>
-                <a href="#projects">Projects</a>
-                <a href="#about">About</a>
-                <button id="themeToggle" class="theme-toggle">☀ / ☾</button>
+        <h1 style="margin-top:3rem; color:var(--pink)">Daliverse Projects</h1>
+
+        <!-- PROJECT CARDS -->
+        <section class="grid-section">
+            <div class="card">
+                <img src="assets/Tricking0.png" alt="Tricking 0 project image">
+                <div class="card-content">
+                    <div class="card-title">Tricking 0</div>
+                    <div class="card-role">Founder & Developer</div>
+                    <p class="card-desc">A dynamic tricking and freerunning
+                        community built around creativity and movement
+                        expression.</p>
+                </div>
             </div>
-        </nav>
 
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <img src="assets/Daliverse2.png" alt="Daliverse Logo"
-                    class="hero-logo" />
-                <p>Movement meets creation</p>
-
+            <div class="card">
+                <img src="assets/Mystic Network Logo W Background.png"
+                    alt="Mystic Gens project image">
+                <div class="card-content">
+                    <div class="card-title">Mystic Gens</div>
+                    <div class="card-role">Manager & Developer</div>
+                    <p class="card-desc">A magical-themed experience focused on
+                        innovation, teamwork, and community-driven
+                        progression.</p>
+                </div>
             </div>
-            <div class="scroll-indicator"></div>
+
+            <div class="card">
+                <img src="assets/Exploit Head.png" alt="MHFarm project image">
+                <div class="card-content">
+                    <div class="card-title">MHFarm</div>
+                    <div class="card-role">Developer & Coordinator</div>
+                    <p class="card-desc">A chill survival and management project
+                        bringing balance between fun mechanics and community
+                        creativity.</p>
+                </div>
+            </div>
         </section>
 
-        <!-- Maps Section -->
-        <section id="maps" class="section">
-            <h2>Maps</h2>
-            <div class="map-card">
-                <img src="assets/Axora.png" alt="Axora Map Preview">
-                <div class="map-info">
-                    <h3>Tropical Axora</h3>
-                    <p> Discovered in <strong>2012</strong> by legendary tricker
-                        &amp; cliff diver
+        <!-- MAP DOWNLOAD CARDS -->
+        <h1 style="margin-top:3rem; color:var(--pink)">Map Downloads</h1>
+
+        <section class="grid-section">
+            <div class="card">
+                <img src="assets/soon.png" alt="Placeholder Map 1">
+                <div class="card-content">
+                    <div class="card-title">Placeholder Map</div>
+                    <p class="card-desc">Map description placeholder text —
+                        details about gameplay, terrain, or theme will go
+                        here.</p>
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="assets/Axora.png" alt="Axora Map">
+                <div class="card-content">
+                    <div class="card-title">Axora</div>
+                    <p class="card-desc"> Discovered in <strong>2012</strong> by
+                        legendary tricker &amp; cliff diver
                         <em>Axoria Fonso</em>, the islands of
                         <strong>Axora</strong> were once wild and untouched.
                         In <strong>2020</strong>, after a massive investment
-                        from <strong>Fullin Studios</strong>,
-                        Axora transformed into the paradise you see today — a
-                        hotspot where trickers and divers
-                        from around the world push the limits of movement
+                        from
+                        <strong>Fullin Studios</strong>, Axora transformed into
+                        the paradise you see today —
+                        a hotspot where trickers and divers from around the
+                        world push the limits of movement
                         against a backdrop of sun, sea, and cliffs.</p>
-                    <a href="assets/maps/Axora.zip" class="btn">Download Map</a>
+                    <a href="assets/maps/Axora.zip" class="download-btn"
+                        download>Download</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="assets/soon.png" alt="Placeholder Map 3">
+                <div class="card-content">
+                    <div class="card-title">Placeholder Map</div>
+                    <p class="card-desc">Map description placeholder text — more
+                        info about the environment or experience will go
+                        here.</p>
+                    <a href="#" class="download-btn">Download</a>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2>Projects</h2>
-            <p class="section-description">
-                A collection of my creative projects — exploring motion, digital
-                art, and the expanding Daliverse.
-            </p>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Tricking 0</h3>
-                    <p>Creative direction, visual storytelling, and community
-                        energy around the Tricking 0 universe.</p>
-                </div>
-                <div class="project-card placeholder"><h3>Coming Soon</h3></div>
-                <div class="project-card placeholder"><h3>Coming Soon</h3></div>
+        <!-- ABOUT ME -->
+        <section class="about">
+            <img src="assets/Dali1.jpg" alt="Dali portrait">
+            <div class="about-text">
+                <h2>Dali</h2>
+                <p>
+                    Martial artist, digital creator, and community builder. I
+                    explore the connection between creativity, movement, and
+                    design—both in the real world and the digital one. The
+                    Daliverse is a collection of my ongoing universes, each
+                    reflecting a different part of that journey.
+                </p>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="section about">
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="assets/Dali1.jpg" alt="Dali portrait">
-                </div>
-                <div class="about-text">
-                    <h2>About Me</h2>
-                    <p>I’m Dali — community manager and creative mind within the
-                        Tricking 0 universe.
-                        I help shape its creative energy, design, and community
-                        voice.
-                        Daliverse is my creative hub — where movement, design,
-                        and imagination collide.</p>
-                    <div class="social-links">
-                        <a href="https://discord.gg/tricking0"
-                            class="social-icon">Discord</a>
-                        <a href="https://youtube.com/user/dalichano"
-                            class="social-icon">YouTube</a>
-                        <a href="https://instagram/@dalichano.alkm"
-                            class="social-icon">Instagram</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <script>
+    const toggle = document.getElementById("themeToggle");
+    const body = document.body;
 
-        <!-- Footer -->
-        <footer class="footer">
-            <img src="assets/Daliverse2.png" alt="Daliverse Logo"
-                class="footer-logo" />
-            <p>© 2025 Dali Verse — Designed by Dali</p>
-        </footer>
+    const savedTheme = localStorage.getItem("daliverse-theme");
+    if (savedTheme) {
+      body.className = savedTheme;
+      toggle.textContent = savedTheme === "dark" ? "☀ Light Mode" : "🌙 Dark Mode";
+    }
 
-        <script src="js/main.js"></script>
+    toggle.addEventListener("click", () => {
+      if (body.classList.contains("dark")) {
+        body.classList.replace("dark", "light");
+        toggle.textContent = "🌙 Dark Mode";
+        localStorage.setItem("daliverse-theme", "light");
+      } else {
+        body.classList.replace("light", "dark");
+        toggle.textContent = "☀ Light Mode";
+        localStorage.setItem("daliverse-theme", "dark");
+      }
+    });
+  </script>
     </body>
 </html>
