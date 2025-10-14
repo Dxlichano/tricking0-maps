@@ -6,414 +6,436 @@
     <title>Daliverse</title>
     <link rel="icon" href="assets/logo.png" />
     <style>
-    /* ===== RESET & BASE ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      transition: background-color 0.4s ease, color 0.4s ease;
-      z-index: 0;
-    }
-
-    h1, h2 {
-      text-align: center;
-      font-weight: 600;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ===== THEME COLORS ===== */
-    :root {
-      --pink: #ff008c;
-      --pink-light: #ff66b2;
-      --bg-dark: #0d0d0d;
-      --bg-light: #f7f7f7;
-      --text-dark: #fff;
-      --text-light: #222;
-      --card-dark: #141414;
-      --card-light: #fff;
-    }
-
-    body.dark {
-      color: var(--text-dark);
-    }
-
-    body.light {
-      color: var(--text-light);
-    }
-
-    /* ===== BACKGROUND ANIMATION ===== */
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, #1a001f, #0d0d0d, #250026, #1a001f);
-      background-size: 300% 300%;
-      z-index: -1;
-      animation: gradientMove 20s ease infinite;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    body.light .background {
-      background: linear-gradient(120deg, #ffe6f0, #fff, #ffd9ec, #fff);
-      background-size: 300% 300%;
-    }
-
-    /* ===== THEME TOGGLE ===== */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--pink);
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      padding: 10px 18px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: background 0.3s ease, transform 0.2s ease;
-      z-index: 999;
-    }
-
-    .theme-toggle:hover {
-      background: var(--pink-light);
-      transform: scale(1.05);
-    }
-
-    /* ===== CARD GRID SHARED STYLE ===== */
-    .grid-section {
-      width: 100%;
-      max-width: 1200px;
-      padding: 4rem 2rem 2rem 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      justify-items: center;
-    }
-
-    .card {
-      border-radius: 16px;
-      overflow: hidden;
-      width: 100%;
-      max-width: 340px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
-      cursor: pointer;
-      position: relative;
-      background-color: var(--card-dark);
-      backdrop-filter: blur(8px);
-    }
-
-    body.light .card {
-      background-color: var(--card-light);
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 25px rgba(255, 0, 140, 0.3);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      filter: brightness(0.8);
-      transition: filter 0.3s ease;
-    }
-
-    .card:hover img {
-      filter: brightness(1);
-    }
-
-    .card-content {
-      padding: 1.5rem;
-    }
-
-    .card-title {
-      font-size: 1.4rem;
-      color: var(--pink);
-      margin-bottom: 0.5rem;
-    }
-
-    .card-role {
-      font-size: 0.9rem;
-      color: var(--pink-light);
-      margin-bottom: 0.8rem;
-    }
-
-    .card-desc {
-      font-size: 0.95rem;
-      color: #ccc;
-      line-height: 1.5;
-    }
-
-    body.light .card-desc {
-      color: #555;
-    }
-
-    /* ===== MAP DOWNLOAD BUTTON ===== */
-    .download-btn {
-      display: inline-block;
-      margin-top: 1.2rem;
-      background: var(--pink);
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 500;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .download-btn:hover {
-      background: var(--pink-light);
-      transform: scale(1.05);
-    }
-
-    /* ===== ABOUT SECTION ===== */
-    .about {
-      width: 100%;
-      max-width: 1000px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      gap: 2rem;
-      background: radial-gradient(circle at top left, rgba(255,0,140,0.2), transparent 70%);
-      border-radius: 12px;
-    }
-
-    body.light .about {
-      background: radial-gradient(circle at top left, rgba(255,0,140,0.1), transparent 70%);
-    }
-
-    .about img {
-      width: 220px;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid var(--pink);
-      box-shadow: 0 0 20px rgba(255,0,140,0.3);
-    }
-
-    .about-text {
-      max-width: 500px;
-    }
-
-    .about-text h2 {
-      color: var(--pink);
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .about-text p {
-      color: #ccc;
-      line-height: 1.6;
-      font-size: 1rem;
-    }
-
-    body.light .about-text p {
-      color: #444;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
-      .about {
-        flex-direction: column;
-        text-align: center;
+      /* ===== RESET & BASE ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
       }
 
-      .about-text h2 {
-        font-size: 1.6rem;
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        transition: background-color 0.4s ease, color 0.4s ease;
+        z-index: 0;
+      }
+
+      h1, h2 {
+        text-align: center;
+        font-weight: 600;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ===== COLORS ===== */
+      :root {
+        --pink: #ff00cc;
+        --pink-light: #ff66b2;
+        --bg-dark: #0d0d0d;
+        --text-dark: #fff;
+        --card-dark: #0f0015;
+      }
+
+      /* ===== BACKGROUND ===== */
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, #1a001f, #0d0d0d, #250026, #1a001f);
+        background-size: 300% 300%;
+        z-index: -1;
+        animation: gradientMove 20s ease infinite;
+      }
+
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* ===== THEME TOGGLE ===== */
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--pink);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 18px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: background 0.3s ease, transform 0.2s ease;
+        z-index: 999;
+      }
+
+      .theme-toggle:hover {
+        background: var(--pink-light);
+        transform: scale(1.05);
+      }
+
+      /* ===== GRID SECTION ===== */
+      .grid-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        justify-items: center;
+        align-items: start;
+        margin: 3rem auto;
+        max-width: 1200px;
+        padding: 0 2rem;
+      }
+
+      /* ===== CARD ===== */
+      .card-link {
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+        max-width: 360px;
+      }
+
+      .card {
+        background: var(--card-dark);
+        border-radius: 15px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 10px rgba(255, 0, 150, 0.25);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 20px rgba(255, 0, 150, 0.4);
       }
 
       .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .card-content {
+        flex: 1;
+        padding: 1.2rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(6px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--pink);
+        margin-bottom: 0.3rem;
+      }
+
+      .card-role {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #d0d0d0;
+        margin-bottom: 0.8rem;
+      }
+
+      .card-desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #ccc;
+      }
+
+      /* ===== DOWNLOAD BUTTON ===== */
+      .download-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        background: var(--pink);
+        color: #fff;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.25s ease, transform 0.2s ease;
+      }
+
+      .download-btn:hover {
+        background: var(--pink-light);
+        transform: translateY(-2px);
+      }
+
+      /* ===== ABOUT SECTION ===== */
+      .about-section {
+        display: flex;
+        justify-content: center;
+        padding: 3rem 2rem;
+      }
+
+      .about-card {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        background: var(--card-dark);
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(255, 0, 150, 0.25);
+        max-width: 1000px;
+        width: 100%;
+        padding: 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .about-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(255, 0, 150, 0.4);
+      }
+
+      .about-image {
+        width: 160px;
         height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--pink);
+        box-shadow: 0 0 20px rgba(255, 0, 150, 0.4);
       }
 
-      .theme-toggle {
-        top: 10px;
-        right: 10px;
-        padding: 8px 14px;
-        font-size: 0.8rem;
+      .about-content {
+        flex: 1;
+        color: #ddd;
       }
-    }
-/* Remove link styling around project cards */
-a.card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
 
-a.card-link:focus,
-a.card-link:hover {
-  outline: none;
-  text-decoration: none;
-  color: inherit;
-}
+      .about-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--pink);
+        margin-bottom: 0.5rem;
+      }
 
-  </style>
+      .about-desc {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #ccc;
+        margin-bottom: 1.2rem;
+      }
+
+      /* ===== SOCIAL LINKS ===== */
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 0, 204, 0.2);
+        color: #fff;
+        font-size: 1.2rem;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--pink);
+        transform: scale(1.1);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 700px) {
+        .about-card {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .about-image {
+          width: 130px;
+          height: 130px;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+    </style>
   </head>
+
   <body class="dark">
     <div class="background"></div>
     <button class="theme-toggle" id="themeToggle">☀ Light Mode</button>
 
     <h1 style="margin-top:3rem; color:var(--pink)">Daliverse Projects</h1>
 
-    <!-- PROJECT CARDS -->
+    <!-- PROJECTS -->
     <section class="grid-section">
       <a href="https://discord.gg/tricking0" target="_blank"
-        rel="noopener noreferrer"
-        class="card-link">
+        rel="noopener noreferrer" class="card-link">
         <div class="card">
-          <img src="assets/tricking0.jpg" alt="Tricking 0 project image">
+          <img src="assets/Tricking0.png" alt="Tricking 0 project image">
           <div class="card-content">
-            <div class="card-title">Tricking 0</div>
-            <div class="card-role">Founder & Developer</div>
-            <p class="card-desc">
-              Tricking 0 is a physics-based flipping game that lets you perform
-              tricking combos, parkour lines, and cliff jumps with full control.
-              With an intuitive Flick-It system, seamless transitions, and
-              active ragdoll physics, it delivers the thrill of extreme movement
-              sports, but without risking your neck
-            </p>
+            <div>
+              <div class="card-title">Tricking 0</div>
+              <div class="card-role">Founder & Developer</div>
+              <p class="card-desc">
+                Tricking 0 is a physics-based flipping game that lets you
+                perform
+                tricking combos, parkour lines, and cliff jumps with full
+                control.
+                With an intuitive Flick-It system, seamless transitions, and
+                active ragdoll physics, it delivers the thrill of extreme
+                movement
+                sports, but without risking your neck.
+              </p>
+            </div>
           </div>
         </div>
       </a>
 
-      <div class="card">
-        <img src="assets/Mystic Network Logo W Background.png"
-          alt="Mystic Gens project image">
-        <a href="https://discord.gg/mysticgens" target="_blank"
-          rel="noopener noreferrer"
-          class="card-link">
+      <a href="https://discord.gg/mysticgens" target="_blank"
+        rel="noopener noreferrer" class="card-link">
+        <div class="card">
+          <img src="assets/Mystic Network Logo W Background.png"
+            alt="Mystic Gens project image">
           <div class="card-content">
-            <div class="card-title">Mystic Gens</div>
-            <div class="card-role">Manager & Developer</div>
-            <p class="card-desc"> High above the clouds, <strong>Mystic
-                Gens</strong> challenges you to turn magic into profit.
-              Upgrade your generators, expand your sky island, and master
-              <em>mining</em>, <em>farming</em>, and <em>fishing</em>
-              to build your fortune before the season ends</p>
+            <div>
+              <div class="card-title">Mystic Gens</div>
+              <div class="card-role">Manager & Developer</div>
+              <p class="card-desc">
+                High above the clouds, <strong>Mystic Gens</strong> challenges
+                you to turn magic into profit.
+                Upgrade your generators, expand your sky island, and master
+                <em>mining</em>, <em>farming</em>, and <em>fishing</em>
+                to build your fortune before the season ends.
+              </p>
+            </div>
           </div>
         </div>
+      </a>
 
+      <a href="https://discord.gg/4PGMJ9JTs5" target="_blank"
+        rel="noopener noreferrer" class="card-link">
         <div class="card">
-          <img src="assets/Exploit Head.png" alt="MHFarm project image">
-          <a href="https://discord.gg/4PGMJ9JTs5" target="_blank"
-            rel="noopener noreferrer"
-            class="card-link">
-            <div class="card-content">
+          <img src="assets/MHFARM.png" alt="MHFarm project image">
+          <div class="card-content">
+            <div>
               <div class="card-title">MHFarm</div>
               <div class="card-role">Administrator</div>
-              <p class="card-desc"> <strong>MHFarm</strong> is a farming tycoon
-                server on <em>Minehut</em>,
+              <p class="card-desc">
+                <strong>MHFarm</strong> is a farming tycoon server on
+                <em>Minehut</em>,
                 set in a <em>plotworld</em> where your goal is to grow, trade,
-                and expand your way to the top before the season ends.</p>
+                and expand your way to the top before the season ends.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </a>
+    </section>
 
-        <!-- MAP DOWNLOAD CARDS -->
-        <h1 style="margin-top:3rem; color:var(--pink)">Map Downloads</h1>
+    <h1 style="margin-top:2rem; color:var(--pink)">Tricking 0 Map Downloads</h1>
 
-        <section class="grid-section">
-          <div class="card">
-            <img src="assets/soon.png" alt="Placeholder Map 1">
-            <div class="card-content">
-              <div class="card-title">Coming Soon</div>
-              <p class="card-desc"> ... </p>
-              <a href="#" class="download-btn">Download</a>
-            </div>
+    <!-- TRICKING-0 MAP DOWNLOADS -->
+    <section class="grid-section">
+      <div class="card">
+        <img src="assets/soon.png" alt="Coming Soon map image">
+        <div class="card-content">
+          <div>
+            <div class="card-title">Coming Soon</div>
           </div>
+          <a href="#" class="download-btn">Download</a>
+        </div>
+      </div>
 
-          <div class="card">
-            <img src="assets/Axora.png" alt="Axora Map">
-            <div class="card-content">
-              <div class="card-title">Axora</div>
-              <p class="card-desc"> Discovered in <strong>2012</strong> by
-                legendary tricker &amp; cliff diver
-                <em>Axoria Fonso</em>, the islands of
-                <strong>Axora</strong> were once wild and untouched.
-                In <strong>2020</strong>, after a massive investment
-                from
-                <strong>Fullin Studios</strong>, Axora transformed into
-                the paradise you see today —
-                a hotspot where trickers and divers from around the
-                world push the limits of movement
-                against a backdrop of sun, sea, and cliffs.</p>
-              <a href="assets/maps/Axora.zip" class="download-btn"
-                download>Download</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="assets/soon.png" alt="Placeholder Map 3">
-            <div class="card-content">
-              <div class="card-title">Coming Soon</div>
-              <p class="card-desc"> ... </p>
-              <a href="#" class="download-btn">Download</a>
-            </div>
-          </div>
-        </section>
-
-        <!-- ABOUT ME -->
-        <section class="about">
-          <img src="assets/Dali1.jpg" alt="Dali portrait">
-          <div class="about-text">
-            <h2>Dali</h2>
-            <p>
-              Welcome to my little corner of the <strong>Daliverse</strong>.
-              I’m <strong>Dali</strong>, a 21-year-old <em>Martial Arts
-                Tricker</em> and <em>trampoliner</em>
-              with a love for gaming, creativity, and building communities
-              across Discord and game servers.
-              Check out my <strong>Tricking 0</strong> maps above and see what
-              I’ve been creating!
+      <div class="card">
+        <img src="assets/Axora.png" alt="Axora map image">
+        <div class="card-content">
+          <div>
+            <div class="card-title">Axora</div>
+            <p class="card-desc">
+              Discovered in <strong>2012</strong> by legendary tricker and cliff
+              diver
+              <em>Axoria Fonso</em>, the islands of <strong>Axora</strong> were
+              once wild and untouched.
+              In <strong>2020</strong>, they became a paradise for trickers and
+              divers alike —
+              a hotspot where the limits of movement meet the beauty of the sea.
             </p>
           </div>
-        </section>
+          <a href="Axora.zip" class="download-btn">Download</a>
+        </div>
+      </div>
 
-        <script>
-    const toggle = document.getElementById("themeToggle");
-    const body = document.body;
+      <div class="card">
+        <img src="assets/soon.png" alt="Coming Soon map image">
+        <div class="card-content">
+          <div class="card-title">Coming Soon</div>
+          <a href="#" class="download-btn">Download</a>
+        </div>
+      </div>
+    </section>
 
-    const savedTheme = localStorage.getItem("daliverse-theme");
-    if (savedTheme) {
-      body.className = savedTheme;
-      toggle.textContent = savedTheme === "dark" ? "☀ Light Mode" : "🌙 Dark Mode";
-    }
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+      <div class="about-card">
+        <img src="assets/Dali1.jpg" alt="Dali portrait" class="about-image">
+        <div class="about-content">
+          <div class="about-title">Dali</div>
+          <p class="about-desc">
+            Welcome to my little corner of the <strong>Daliverse</strong>.
+            I’m <strong>Dali</strong>, a 21-year-old <em>Martial Arts
+              Tricker</em> and <em>trampoliner</em>
+            with a love for gaming, creativity, and building communities across
+            Discord and game servers.
+            Check out my <strong>Tricking 0</strong> maps above and see what
+            I’ve been creating!
+          </p>
 
-    toggle.addEventListener("click", () => {
-      if (body.classList.contains("dark")) {
-        body.classList.replace("dark", "light");
-        toggle.textContent = "🌙 Dark Mode";
-        localStorage.setItem("daliverse-theme", "light");
-      } else {
-        body.classList.replace("light", "dark");
-        toggle.textContent = "☀ Light Mode";
-        localStorage.setItem("daliverse-theme", "dark");
+          <div class="social-links">
+            <a href="https://www.instagram.com/dalichano.alkm/" target="_blank"
+              title="Instagram">📸</a>
+            <a href="https://www.youtube.com/@Dalichano" target="_blank"
+              title="YouTube">▶️</a>
+            <a href="https://tiktok.com/daliverse" target="_blank"
+              title="TikTok">🎵</a>
+            <a href="https://twitch.tv/dalichano" target="_blank"
+              title="Twitch">🎮</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const toggle = document.getElementById("themeToggle");
+      const body = document.body;
+
+      const savedTheme = localStorage.getItem("daliverse-theme");
+      if (savedTheme) {
+        body.className = savedTheme;
+        toggle.textContent = savedTheme === "dark" ? "☀ Light Mode" : "🌙 Dark Mode";
       }
-    });
-  </script>
-      </body>
-    </html>
+
+      toggle.addEventListener("click", () => {
+        if (body.classList.contains("dark")) {
+          body.classList.replace("dark", "light");
+          toggle.textContent = "🌙 Dark Mode";
+          localStorage.setItem("daliverse-theme", "light");
+        } else {
+          body.classList.replace("light", "dark");
+          toggle.textContent = "☀ Light Mode";
+          localStorage.setItem("daliverse-theme", "dark");
+        }
+      });
+    </script>
+  </body>
+</html>
