@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rank Comparison Table</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rank Comparison Table</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
+            rel="stylesheet">
+        <style>
         :root {
             --color-main: #f4c75d;
             --color-accent: #302409;
@@ -489,471 +492,558 @@
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="page-header">
-            <div class="logo">
-                <img src="assets/mystic1.png" alt="Server Logo">
+    </head>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <div class="logo">
+                    <img src="assets/mystic1.png" alt="Server Logo">
+                </div>
+                <h1><i class="fa-solid fa-crown"
+                        style="margin-right: 0.5rem;"></i>Rank Comparison</h1>
+                <p>Compare features across all available ranks</p>
             </div>
-            <h1><i class="fa-solid fa-crown" style="margin-right: 0.5rem;"></i>Rank Comparison</h1>
-            <p>Compare features across all available ranks</p>
-        </div>
 
-        <!-- Controls Section -->
-        <div class="controls">
-            <div class="search-box">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search features, commands...">
-            </div>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fa-solid fa-layer-group"></i> All
-                </button>
-                <button class="filter-btn" data-filter="multipliers">
-                    <i class="fa-solid fa-chart-line"></i> Multipliers
-                </button>
-                <button class="filter-btn" data-filter="perks">
-                    <i class="fa-solid fa-star"></i> Perks
-                </button>
-                <button class="filter-btn" data-filter="commands">
-                    <i class="fa-solid fa-terminal"></i> Commands
-                </button>
-                <button class="filter-btn" data-filter="reclaim">
-                    <i class="fa-solid fa-gift"></i> Rewards
-                </button>
-            </div>
-        </div>
-
-        <div class="table-wrapper">
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr class="rank-header">
-                            <th>Features</th>
-                            <th>
-                                <span class="rank-name">Default</span>
-                                <span class="rank-price">Free</span>
-                            </th>
-                            <th>
-                                <span class="rank-name">Apprentice</span>
-                                <span class="rank-price">€9.99</span>
-                                <button class="buy-btn" onclick="window.location.href='#buy-apprentice'">
-                                    <i class="fa-solid fa-shopping-cart"></i> Buy Now
-                                </button>
-                            </th>
-                            <th>
-                                <span class="rank-name">Enchanted</span>
-                                <span class="rank-price">€14.99</span>
-                                <button class="buy-btn" onclick="window.location.href='#buy-enchanted'">
-                                    <i class="fa-solid fa-shopping-cart"></i> Buy Now
-                                </button>
-                            </th>
-                            <th>
-                                <span class="rank-badge best-value">Best Value</span>
-                                <span class="rank-name">Arcane</span>
-                                <span class="rank-price">€19.99</span>
-                                <button class="buy-btn" onclick="window.location.href='#buy-arcane'">
-                                    <i class="fa-solid fa-shopping-cart"></i> Buy Now
-                                </button>
-                            </th>
-                            <th>
-                                <span class="rank-name">Celestial</span>
-                                <span class="rank-price">€29.99</span>
-                                <button class="buy-btn" onclick="window.location.href='#buy-celestial'">
-                                    <i class="fa-solid fa-shopping-cart"></i> Buy Now
-                                </button>
-                            </th>
-                            <th>
-                                <span class="rank-badge popular">Popular</span>
-                                <span class="rank-name">Divine</span>
-                                <span class="rank-price">€49.99</span>
-                                <button class="buy-btn" onclick="window.location.href='#buy-divine'">
-                                    <i class="fa-solid fa-shopping-cart"></i> Buy Now
-                                </button>
-                            </th>
-                            <th>
-                                <span class="rank-name">Mystic</span>
-                                <span class="rank-price">€99.99</span>
-                                <button class="buy-btn" onclick="window.location.href='#buy-mystic'">
-                                    <i class="fa-solid fa-shopping-cart"></i> Buy Now
-                                </button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <tr class="section-header-row" data-section="multipliers">
-                            <td colspan="8" class="section-header">
-                                <i class="fa-solid fa-chart-line"></i> Multipliers
-                            </td>
-                        </tr>
-                        <tr data-section="multipliers" data-search="money multiplier">
-                            <td>
-                                Money Multiplier
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Earn more money from all in-game activities</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">10%</td>
-                            <td class="feature-text">30%</td>
-                            <td class="feature-text">50%</td>
-                            <td class="feature-text">70%</td>
-                            <td class="feature-text">100%</td>
-                            <td class="feature-text">150%</td>
-                        </tr>
-                        <tr data-section="multipliers" data-search="xp multiplier experience">
-                            <td>
-                                XP Multiplier
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Level up faster with increased XP gains</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">10%</td>
-                            <td class="feature-text">30%</td>
-                            <td class="feature-text">50%</td>
-                            <td class="feature-text">70%</td>
-                            <td class="feature-text">100%</td>
-                            <td class="feature-text">125%</td>
-                        </tr>
-                        <tr data-section="multipliers" data-search="farming multiplier crops">
-                            <td>
-                                Farming Multiplier
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Get more drops from farming activities</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">50%</td>
-                            <td class="feature-text">70%</td>
-                            <td class="feature-text">100%</td>
-                        </tr>
-                        <tr data-section="multipliers" data-search="gens multiplier generators">
-                            <td>
-                                Gens Multiplier
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Generators produce resources faster</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">50%</td>
-                            <td class="feature-text">70%</td>
-                        </tr>
-                        <tr data-section="multipliers" data-search="tokens multiplier currency">
-                            <td>
-                                Tokens Multiplier
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Earn bonus tokens from all sources</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">50%</td>
-                        </tr>
-
-                        <tr class="section-header-row" data-section="perks">
-                            <td colspan="8" class="section-header">
-                                <i class="fa-solid fa-star"></i> Perks
-                            </td>
-                        </tr>
-                        <tr data-section="perks" data-search="generator slots gens">
-                            <td>
-                                Generator Slots
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Place more generators in your area</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">+10</td>
-                            <td class="feature-text">+20</td>
-                            <td class="feature-text">+30</td>
-                            <td class="feature-text">+40</td>
-                            <td class="feature-text">+50</td>
-                            <td class="feature-text">+60</td>
-                        </tr>
-                        <tr data-section="perks" data-search="auction slots ah market">
-                            <td>
-                                Auction Slots
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">List more items on the auction house</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">9</td>
-                            <td class="feature-text">11</td>
-                            <td class="feature-text">13</td>
-                            <td class="feature-text">15</td>
-                            <td class="feature-text">20</td>
-                        </tr>
-
-                        <tr class="section-header-row" data-section="commands">
-                            <td colspan="8" class="section-header">
-                                <i class="fa-solid fa-terminal"></i> Commands
-                            </td>
-                        </tr>
-                        <tr data-section="commands" data-search="kit command starter">
-                            <td>/kit [Rank]</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="ptime command time personal">
-                            <td>/ptime</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="pweather command weather personal">
-                            <td>/pweather</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="feed command hunger food">
-                            <td>/feed</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="craft command crafting table workbench">
-                            <td>/craft</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="autocompress command compress blocks auto">
-                            <td>/autocompress</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="color command chat colors nickname">
-                            <td>/color</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="fly command flight flying">
-                            <td>/fly</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="rename command name item">
-                            <td>/rename</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="feature-text">Color</td>
-                            <td class="feature-text">Color</td>
-                            <td class="feature-text">Color</td>
-                        </tr>
-                        <tr data-section="commands" data-search="autosell command sell auto automatic">
-                            <td>/autosell</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="repair command fix tools armor">
-                            <td>/repair</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="instabreak command instant break mining">
-                            <td>/instabreak</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                            <td class="check">✓</td>
-                        </tr>
-                        <tr data-section="commands" data-search="heal command health hp regenerate">
-                            <td>/heal</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="check">✓</td>
-                        </tr>
-
-                        <tr class="section-header-row" data-section="reclaim">
-                            <td colspan="8" class="section-header">
-                                <i class="fa-solid fa-gift"></i> Reclaim Rewards
-                            </td>
-                        </tr>
-                        <tr data-section="reclaim" data-search="tokens reward currency">
-                            <td>
-                                Tokens
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Bonus tokens when reclaiming your rank</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">+250</td>
-                            <td class="feature-text">+500</td>
-                            <td class="feature-text">+750</td>
-                            <td class="feature-text">+1000</td>
-                            <td class="feature-text">+1250</td>
-                            <td class="feature-text">+2000</td>
-                        </tr>
-                        <tr data-section="reclaim" data-search="sellwands wands sell wand">
-                            <td>
-                                Sellwands
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Wands to quickly sell items with specified uses</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">1x (500)</td>
-                            <td class="feature-text">2x (500)</td>
-                            <td class="feature-text">3x (250)</td>
-                            <td class="feature-text">3x (500)</td>
-                            <td class="feature-text">6x (1000)</td>
-                        </tr>
-                        <tr data-section="reclaim" data-search="common keys crate key">
-                            <td>
-                                Common Keys
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Keys to open common crates</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">1x</td>
-                            <td class="feature-text">1x</td>
-                            <td class="feature-text">3x</td>
-                            <td class="feature-text">6x</td>
-                        </tr>
-                        <tr data-section="reclaim" data-search="magical keys crate key magic">
-                            <td>
-                                Magical Keys
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Keys to open magical crates with better rewards</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">1x</td>
-                            <td class="feature-text">2x</td>
-                            <td class="feature-text">3x</td>
-                        </tr>
-                        <tr data-section="reclaim" data-search="legendary keys crate key rare">
-                            <td>
-                                Legendary Keys
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Keys to open legendary crates with premium items</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">1x</td>
-                            <td class="feature-text">2x</td>
-                        </tr>
-                        <tr data-section="reclaim" data-search="mystic keys crate key ultra rare">
-                            <td>
-                                Mystic Keys
-                                <span class="tooltip-wrapper">
-                                    <i class="fa-solid fa-circle-info tooltip-icon"></i>
-                                    <span class="tooltip-content">Keys to open mystic crates with exclusive items</span>
-                                </span>
-                            </td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="cross">✗</td>
-                            <td class="feature-text">1x</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="no-results" id="noResults">
+            <!-- Controls Section -->
+            <div class="controls">
+                <div class="search-box">
                     <i class="fa-solid fa-search"></i>
-                    <p>No features found matching your search.</p>
+                    <input type="text" id="searchInput"
+                        placeholder="Search features, commands...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fa-solid fa-layer-group"></i> All
+                    </button>
+                    <button class="filter-btn" data-filter="multipliers">
+                        <i class="fa-solid fa-chart-line"></i> Multipliers
+                    </button>
+                    <button class="filter-btn" data-filter="perks">
+                        <i class="fa-solid fa-star"></i> Perks
+                    </button>
+                    <button class="filter-btn" data-filter="commands">
+                        <i class="fa-solid fa-terminal"></i> Commands
+                    </button>
+                    <button class="filter-btn" data-filter="reclaim">
+                        <i class="fa-solid fa-gift"></i> Rewards
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr class="rank-header">
+                                <th>Features</th>
+                                <th>
+                                    <span class="rank-name">Default</span>
+                                    <span class="rank-price">Free</span>
+                                </th>
+                                <th>
+                                    <span class="rank-name">Apprentice</span>
+                                    <span class="rank-price">€9.99</span>
+                                    <button class="buy-btn"
+                                        onclick="window.location.href='#buy-apprentice'">
+                                        <i
+                                            class="fa-solid fa-shopping-cart"></i>
+                                        Buy Now
+                                    </button>
+                                </th>
+                                <th>
+                                    <span class="rank-name">Enchanted</span>
+                                    <span class="rank-price">€14.99</span>
+                                    <button class="buy-btn"
+                                        onclick="window.location.href='#buy-enchanted'">
+                                        <i
+                                            class="fa-solid fa-shopping-cart"></i>
+                                        Buy Now
+                                    </button>
+                                </th>
+                                <th>
+                                    <span
+                                        class="rank-badge popular">Popular</span>
+                                    <span class="rank-name">Arcane</span>
+                                    <span class="rank-price">€19.99</span>
+                                    <button class="buy-btn"
+                                        onclick="window.location.href='#buy-arcane'">
+                                        <i
+                                            class="fa-solid fa-shopping-cart"></i>
+                                        Buy Now
+                                    </button>
+                                </th>
+                                <th>
+                                    <span class="rank-name">Celestial</span>
+                                    <span class="rank-price">€29.99</span>
+                                    <button class="buy-btn"
+                                        onclick="window.location.href='#buy-celestial'">
+                                        <i
+                                            class="fa-solid fa-shopping-cart"></i>
+                                        Buy Now
+                                    </button>
+                                </th>
+                                <th>
+                                    <span class="rank-name">Divine</span>
+                                    <span class="rank-price">€49.99</span>
+                                    <button class="buy-btn"
+                                        onclick="window.location.href='#buy-divine'">
+                                        <i
+                                            class="fa-solid fa-shopping-cart"></i>
+                                        Buy Now
+                                    </button>
+                                </th>
+                                <th>
+                                    <span class="rank-badge best-value">Best
+                                        Value</span>
+                                    <span class="rank-name">Mystic</span>
+                                    <span class="rank-price">€99.99</span>
+                                    <button class="buy-btn"
+                                        onclick="window.location.href='#buy-mystic'">
+                                        <i
+                                            class="fa-solid fa-shopping-cart"></i>
+                                        Buy Now
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr class="section-header-row"
+                                data-section="multipliers">
+                                <td colspan="8" class="section-header">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    Multipliers
+                                </td>
+                            </tr>
+                            <tr data-section="multipliers"
+                                data-search="money multiplier">
+                                <td>
+                                    Money Multiplier
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Earn more
+                                            money from all in-game
+                                            activities</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">10%</td>
+                                <td class="feature-text">30%</td>
+                                <td class="feature-text">50%</td>
+                                <td class="feature-text">70%</td>
+                                <td class="feature-text">100%</td>
+                                <td class="feature-text">150%</td>
+                            </tr>
+                            <tr data-section="multipliers"
+                                data-search="xp multiplier experience">
+                                <td>
+                                    XP Multiplier
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Level up
+                                            faster with increased XP
+                                            gains</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">10%</td>
+                                <td class="feature-text">30%</td>
+                                <td class="feature-text">50%</td>
+                                <td class="feature-text">70%</td>
+                                <td class="feature-text">100%</td>
+                                <td class="feature-text">125%</td>
+                            </tr>
+                            <tr data-section="multipliers"
+                                data-search="farming multiplier crops">
+                                <td>
+                                    Farming Multiplier
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Get more
+                                            drops from farming activities</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">50%</td>
+                                <td class="feature-text">70%</td>
+                                <td class="feature-text">100%</td>
+                            </tr>
+                            <tr data-section="multipliers"
+                                data-search="gens multiplier generators">
+                                <td>
+                                    Gens Multiplier
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Generators
+                                            produce resources faster</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">50%</td>
+                                <td class="feature-text">70%</td>
+                            </tr>
+                            <tr data-section="multipliers"
+                                data-search="tokens multiplier currency">
+                                <td>
+                                    Tokens Multiplier
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Earn bonus
+                                            tokens from all sources</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">50%</td>
+                            </tr>
+
+                            <tr class="section-header-row" data-section="perks">
+                                <td colspan="8" class="section-header">
+                                    <i class="fa-solid fa-star"></i> Perks
+                                </td>
+                            </tr>
+                            <tr data-section="perks"
+                                data-search="generator slots gens">
+                                <td>
+                                    Generator Slots
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Place more
+                                            generators in your area</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">+10</td>
+                                <td class="feature-text">+20</td>
+                                <td class="feature-text">+30</td>
+                                <td class="feature-text">+40</td>
+                                <td class="feature-text">+50</td>
+                                <td class="feature-text">+60</td>
+                            </tr>
+                            <tr data-section="perks"
+                                data-search="auction slots ah market">
+                                <td>
+                                    Auction Slots
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">List more
+                                            items on the auction house</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">9</td>
+                                <td class="feature-text">11</td>
+                                <td class="feature-text">13</td>
+                                <td class="feature-text">15</td>
+                                <td class="feature-text">20</td>
+                            </tr>
+
+                            <tr class="section-header-row"
+                                data-section="commands">
+                                <td colspan="8" class="section-header">
+                                    <i class="fa-solid fa-terminal"></i>
+                                    Commands
+                                </td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="kit command starter">
+                                <td>/kit [Rank]</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="ptime command time personal">
+                                <td>/ptime</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="pweather command weather personal">
+                                <td>/pweather</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="feed command hunger food">
+                                <td>/feed</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="craft command crafting table workbench">
+                                <td>/craft</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="autocompress command compress blocks auto">
+                                <td>/autocompress</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="color command chat colors nickname">
+                                <td>/color</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="fly command flight flying">
+                                <td>/fly</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="rename command name item">
+                                <td>/rename</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="feature-text">Color</td>
+                                <td class="feature-text">Color</td>
+                                <td class="feature-text">Color</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="autosell command sell auto automatic">
+                                <td>/autosell</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="repair command fix tools armor">
+                                <td>/repair</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="instabreak command instant break mining">
+                                <td>/instabreak</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr data-section="commands"
+                                data-search="heal command health hp regenerate">
+                                <td>/heal</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                            </tr>
+
+                            <tr class="section-header-row"
+                                data-section="reclaim">
+                                <td colspan="8" class="section-header">
+                                    <i class="fa-solid fa-gift"></i> Reclaim
+                                    Rewards
+                                </td>
+                            </tr>
+                            <tr data-section="reclaim"
+                                data-search="tokens reward currency">
+                                <td>
+                                    Tokens
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Bonus
+                                            tokens when reclaiming your
+                                            rank</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">+250</td>
+                                <td class="feature-text">+500</td>
+                                <td class="feature-text">+750</td>
+                                <td class="feature-text">+1000</td>
+                                <td class="feature-text">+1250</td>
+                                <td class="feature-text">+2000</td>
+                            </tr>
+                            <tr data-section="reclaim"
+                                data-search="sellwands wands sell wand">
+                                <td>
+                                    Sellwands
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Wands to
+                                            quickly sell items with specified
+                                            uses</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">1x (500)</td>
+                                <td class="feature-text">2x (500)</td>
+                                <td class="feature-text">3x (250)</td>
+                                <td class="feature-text">3x (500)</td>
+                                <td class="feature-text">6x (1000)</td>
+                            </tr>
+                            <tr data-section="reclaim"
+                                data-search="common keys crate key">
+                                <td>
+                                    Common Keys
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Keys to
+                                            open common crates</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">1x</td>
+                                <td class="feature-text">1x</td>
+                                <td class="feature-text">3x</td>
+                                <td class="feature-text">6x</td>
+                            </tr>
+                            <tr data-section="reclaim"
+                                data-search="magical keys crate key magic">
+                                <td>
+                                    Magical Keys
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Keys to
+                                            open magical crates with better
+                                            rewards</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">1x</td>
+                                <td class="feature-text">2x</td>
+                                <td class="feature-text">3x</td>
+                            </tr>
+                            <tr data-section="reclaim"
+                                data-search="legendary keys crate key rare">
+                                <td>
+                                    Legendary Keys
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Keys to
+                                            open legendary crates with premium
+                                            items</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">1x</td>
+                                <td class="feature-text">2x</td>
+                            </tr>
+                            <tr data-section="reclaim"
+                                data-search="mystic keys crate key ultra rare">
+                                <td>
+                                    Mystic Keys
+                                    <span class="tooltip-wrapper">
+                                        <i
+                                            class="fa-solid fa-circle-info tooltip-icon"></i>
+                                        <span class="tooltip-content">Keys to
+                                            open mystic crates with exclusive
+                                            items</span>
+                                    </span>
+                                </td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="feature-text">1x</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="no-results" id="noResults">
+                        <i class="fa-solid fa-search"></i>
+                        <p>No features found matching your search.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
+        <script>
         // ============================================
         // CONFIGURATION SECTION - EASY TO CUSTOMIZE
         // ============================================
@@ -1143,5 +1233,5 @@
             }
         });
     </script>
-</body>
+    </body>
 </html>
