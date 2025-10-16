@@ -491,14 +491,161 @@
                 top: 0.25rem;
             }
         }
+        /* Navigation Menu Styles */
+        .nav-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .nav-toggle {
+            background: var(--color-main, #f4c75d);
+            color: var(--color-accent, #302409);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: var(--bg-1, #171717);
+            border: 1px solid #404040;
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .nav-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 12px 20px;
+            color: var(--color-text-primary, #f5f5f5);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #404040;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-link:last-child {
+            border-bottom: none;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-2, #262626);
+            color: var(--color-main, #f4c75d);
+            padding-left: 25px;
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--color-main, #f4c75d);
+        }
+
+        .nav-link.current {
+            background: rgba(244, 199, 93, 0.1);
+            color: var(--color-main, #f4c75d);
+        }
+
+        /* Override for index.html (pink theme) */
+        body.dark .nav-toggle,
+        body.light .nav-toggle {
+            background: var(--pink, #ff00cc);
+            color: #fff;
+        }
+
+        body.dark .nav-toggle:hover,
+        body.light .nav-toggle:hover {
+            background: var(--pink-light, #ff66b2);
+        }
+
+        body.dark .nav-link i,
+        body.light .nav-link i {
+            color: var(--pink, #ff00cc);
+        }
+
+        body.dark .nav-link:hover,
+        body.light .nav-link:hover {
+            color: var(--pink, #ff00cc);
+        }
+
+        body.dark .nav-link.current,
+        body.light .nav-link.current {
+            background: rgba(255, 0, 204, 0.1);
+            color: var(--pink, #ff00cc);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                top: 10px;
+                left: 10px;
+            }
+
+            .nav-toggle {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+
+            .nav-dropdown {
+                min-width: 180px;
+            }
+
+            .nav-link {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
     </head>
     <body>
+
         <div class="container">
             <div class="page-header">
                 <div class="logo">
-                    <img src="assets/mystic1.png" alt="Server Logo">
+                    <a href="https://daliverse.nl/mystic-team" target="_blank">
+                        <img src="assets/mystic1.png" alt="Server Logo">
+                    </a>
                 </div>
+
                 <h1><i class="fa-solid fa-crown"
                         style="margin-right: 0.5rem;"></i>Rank Comparison</h1>
                 <p>Compare features across all available ranks</p>
