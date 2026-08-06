@@ -1,441 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daliverse</title>
-    <link rel="icon" href="assets/logo.png" />
-    <style>
-      /* ===== RESET & BASE ===== */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daliverse — Dali's Communities & Maps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #150a10;
+    --bg-2: #1b0d14;
+    --panel: #24121b;
+    --panel-2: #2c1520;
+    --border: rgba(255,236,240,0.09);
+    --text: #faf1f4;
+    --text-dim: #c2a3ac;
+    --text-dimmer: #8f6c76;
+    --gold: #ff004c;
+    --gold-soft: rgba(255,0,76,0.16);
+    --cyan: #ff6f9c;
+    --cyan-soft: rgba(255,111,156,0.16);
+    --moss: #9bd47a;
+    --radius: 18px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: radial-gradient(120% 90% at 50% -10%, #3a0f24 0%, var(--bg) 45%, #0f070c 100%);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  a{ color: inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
+  ::selection{ background: var(--gold); color:#fff2f5; }
+
+  :focus-visible{
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px; height:1px;
+    background: var(--cyan);
+    display:inline-block;
+  }
+
+  h1,h2,h3{ font-family:'Unbounded', sans-serif; letter-spacing:-0.01em; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(23,17,41,0.72);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:1120px;
+    margin:0 auto;
+    padding: 16px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Unbounded', sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    letter-spacing:0.02em;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .logo .dot{
+    width:9px; height:9px; border-radius:50%;
+    background: linear-gradient(135deg, var(--gold), var(--cyan));
+    box-shadow: 0 0 14px rgba(242,166,90,0.7);
+  }
+  nav.links{ display:flex; gap:30px; font-size:0.88rem; color:var(--text-dim); }
+  nav.links a{ transition: color 0.2s ease; position:relative; }
+  nav.links a:hover{ color: var(--text); }
+  .nav-cta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.04em;
+    padding:9px 16px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    color:var(--text);
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .nav-cta:hover{ border-color: var(--cyan); background: var(--cyan-soft); }
+
+  @media(max-width:720px){ nav.links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding: 120px 0 100px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero-trail{
+    position:absolute;
+    top:-40px; left:50%;
+    transform:translateX(-50%);
+    width: min(900px, 130vw);
+    opacity:0.9;
+    pointer-events:none;
+  }
+  .hero-trail path{
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: draw 2.6s cubic-bezier(.65,0,.35,1) forwards 0.2s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .hero-content{ position:relative; z-index:2; }
+  .hero-content .eyebrow{ justify-content:center; margin-bottom:22px; }
+  .hero-content .eyebrow::before{ display:none; }
+
+  h1.title{
+    font-size: clamp(2.8rem, 8vw, 5.6rem);
+    font-weight: 800;
+    line-height: 0.98;
+    background: linear-gradient(180deg, #ffffff 10%, #c9bde6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-sub{
+    max-width: 560px;
+    margin: 22px auto 0;
+    color: var(--text-dim);
+    font-size: 1.05rem;
+  }
+  .hero-actions{
+    margin-top: 38px;
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+    padding: 13px 24px;
+    border-radius: 999px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--gold), #c40039);
+    color: #fff2f5;
+    font-weight:600;
+    box-shadow: 0 8px 24px rgba(255,0,76,0.3);
+  }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,0,76,0.45); }
+  .btn-ghost{
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover{ border-color: var(--cyan); background: var(--cyan-soft); transform: translateY(-2px); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{ padding: 92px 0; position:relative; }
+  .section-head{ margin-bottom: 48px; max-width:600px; }
+  .section-head h2{ font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-top:14px; }
+  .section-head p{ color:var(--text-dim); margin-top:12px; font-size:0.98rem; }
+
+  .divider{
+    width:100%; height:64px;
+    display:block;
+    opacity:0.5;
+  }
+
+  /* ---------- PROJECT CARDS ---------- */
+  .projects-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media(max-width:860px){ .projects-grid{ grid-template-columns:1fr; } }
+
+  .pcard{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .pcard:hover{ transform: translateY(-6px); border-color: rgba(255,255,255,0.18); }
+
+  .pcard-art{
+    height:140px;
+    position:relative;
+    overflow:hidden;
+  }
+  .pcard-body{ padding: 22px 22px 26px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .pcard-role{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--text-dimmer);
+  }
+  .pcard-body h3{ font-size:1.28rem; font-weight:600; }
+  .pcard-body p{ color:var(--text-dim); font-size:0.9rem; flex:1; }
+  .pcard-body p em{ color:var(--text); font-style:normal; }
+  .pcard-link{
+    margin-top:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color: var(--cyan);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .pcard-link svg{ transition: transform .2s ease; }
+  .pcard:hover .pcard-link svg{ transform: translate(3px,-3px); }
+
+  /* art variants */
+  .art-tricking{ background:
+      radial-gradient(60% 90% at 20% 20%, rgba(255,0,76,0.35), transparent 60%),
+      linear-gradient(135deg, #2c1424, #1b0d14); }
+  .art-mystic{ background:
+      radial-gradient(70% 100% at 80% 10%, rgba(255,111,156,0.3), transparent 55%),
+      radial-gradient(50% 60% at 20% 90%, rgba(255,0,76,0.2), transparent 60%),
+      linear-gradient(135deg, #201430, #1b0d14); }
+  .art-farm{ background:
+      linear-gradient(135deg, #223321, #1b0d14 65%);
       }
+  .art-farm .grid-pat{
+    position:absolute; inset:0;
+    background-image: linear-gradient(rgba(155,212,122,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(155,212,122,0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(180deg, transparent, black 70%);
+  }
+  .art-mystic .stars{ position:absolute; inset:0; }
+  .art-mystic .stars span{
+    position:absolute; width:2px; height:2px; border-radius:50%;
+    background: #fff; opacity:0.7;
+  }
+  .art-tricking svg{ position:absolute; bottom:-10px; left:-10px; width:140%; opacity:0.9; }
 
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
-        transition: background-color 0.4s ease, color 0.4s ease;
-        z-index: 0;
-      }
+  /* ---------- MAPS ---------- */
+  .maps-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media(max-width:860px){ .maps-grid{ grid-template-columns:1fr; } }
+  .mcard{
+    background: var(--panel);
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .mcard-img{
+    height: 170px;
+    background: var(--panel-2);
+    overflow:hidden;
+    position:relative;
+  }
+  .mcard-img img{ width:100%; height:100%; object-fit:cover; }
+  .mcard-img.soon{
+    display:flex; align-items:center; justify-content:center;
+    background: repeating-linear-gradient(135deg, var(--panel-2) 0px, var(--panel-2) 10px, #241c3f 10px, #241c3f 20px);
+  }
+  .mcard-img.soon span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--text-dimmer);
+    background: rgba(23,17,41,0.85);
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .mcard-body{ padding: 20px 20px 24px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .mcard-body h3{ font-size:1.1rem; font-weight:600; }
+  .mcard-body p{ color:var(--text-dim); font-size:0.87rem; flex:1; }
+  .mcard-dl{
+    margin-top:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    padding:10px 16px;
+    border-radius:999px;
+    text-align:center;
+    border:1px solid var(--border);
+    transition: all .2s ease;
+  }
+  .mcard-dl.active{ border-color: var(--gold); color:var(--gold); }
+  .mcard-dl.active:hover{ background: var(--gold-soft); }
+  .mcard-dl.disabled{ color: var(--text-dimmer); cursor:default; pointer-events:none; }
 
-      h1, h2 {
-        text-align: center;
-        font-weight: 600;
-      }
+  /* ---------- ABOUT ---------- */
+  .about{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    align-items:center;
+  }
+  @media(max-width:760px){ .about{ grid-template-columns:1fr; } }
+  .about-photo{
+    position:relative;
+    border-radius: 20px;
+    overflow:hidden;
+    aspect-ratio: 1/1.05;
+    border: 1px solid var(--border);
+  }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; }
+  .about-photo::after{
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 60%, rgba(23,17,41,0.75));
+  }
+  .about-text .eyebrow{ margin-bottom:16px; }
+  .about-text h2{ font-size: clamp(1.6rem,3vw,2.2rem); margin-bottom:16px; }
+  .about-text p{ color: var(--text-dim); max-width:520px; }
+  .about-text p + p{ margin-top:12px; }
+  .about-text strong{ color:var(--text); font-weight:600; }
 
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
+  .stat-row{ display:flex; gap:28px; margin-top:26px; flex-wrap:wrap; }
+  .stat{ }
+  .stat .num{ font-family:'Unbounded', sans-serif; font-size:1.5rem; color:var(--gold); }
+  .stat .lbl{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dimmer); }
 
-      /* ===== COLORS ===== */
-      :root {
-        --pink: #ff00cc;
-        --pink-light: #ff66b2;
-        --bg-dark: #0d0d0d;
-        --text-dark: #fff;
-        --card-dark: #0f0015;
-      }
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top: 1px solid var(--border);
+    padding: 46px 0 40px;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .footer-brand{ font-family:'Unbounded', sans-serif; font-size:0.95rem; }
+  .footer-brand span{ color:var(--text-dimmer); font-family:'JetBrains Mono', monospace; font-size:0.75rem; display:block; margin-top:4px; }
+  .socials{ display:flex; gap:14px; }
+  .social-btn{
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    transition: all .2s ease;
+  }
+  .social-btn:hover{ border-color: var(--cyan); background: var(--cyan-soft); transform: translateY(-3px); }
+  .social-btn svg{ width:18px; height:18px; }
 
-      /* ===== BACKGROUND ===== */
-      .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(120deg, #1a001f, #0d0d0d, #250026, #1a001f);
-        background-size: 300% 300%;
-        z-index: -1;
-        animation: gradientMove 20s ease infinite;
-      }
+</style>
+</head>
+<body>
 
-      @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo"><span class="dot"></span>DALIVERSE</div>
+    <nav class="links">
+      <a href="#projects">Projects</a>
+      <a href="#maps">Maps</a>
+      <a href="#about">Dali</a>
+    </nav>
+    <a class="nav-cta" href="https://discord.gg/tricking0" target="_blank" rel="noopener">Join a server</a>
+  </div>
+</header>
 
-      /* ===== THEME TOGGLE ===== */
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--pink);
-        color: #fff;
-        border: none;
-        border-radius: 50px;
-        padding: 10px 18px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: background 0.3s ease, transform 0.2s ease;
-        z-index: 999;
-      }
+<section class="hero">
+  <svg class="hero-trail" viewBox="0 0 900 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M40 220 C 180 220, 220 40, 360 60 S 520 240, 660 160 S 800 20, 860 60"
+          stroke="url(#trailGrad)" stroke-width="2.5" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="trailGrad" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ff004c" stop-opacity="0"/>
+        <stop offset="0.5" stop-color="#ff004c"/>
+        <stop offset="1" stop-color="#ff6f9c"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Tricking · Trampoline · Community Building</p>
+    <h1 class="title">The Daliverse</h1>
+    <p class="hero-sub">Physics-based flip games, sky-island tycoons, and farming plots — three communities built and run by one 21-year-old tricker who'd rather build a world than just play in one.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">See the projects</a>
+      <a class="btn btn-ghost" href="#maps">Download a map</a>
+    </div>
+  </div>
+</section>
 
-      .theme-toggle:hover {
-        background: var(--pink-light);
-        transform: scale(1.05);
-      }
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">01 — What I run</p>
+      <h2>Three worlds, one builder</h2>
+      <p>Every server started as a small idea and a Discord invite. Here's what's live right now.</p>
+    </div>
 
-      /* ===== GRID SECTION ===== */
-      .grid-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        justify-items: center;
-        align-items: start;
-        margin: 3rem auto;
-        max-width: 1200px;
-        padding: 0 2rem;
-      }
+    <div class="projects-grid">
 
-      /* ===== CARD ===== */
-      .card-link {
-        text-decoration: none;
-        color: inherit;
-        width: 100%;
-        max-width: 360px;
-      }
-
-      .card {
-        background: var(--card-dark);
-        border-radius: 15px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 0 10px rgba(255, 0, 150, 0.25);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 20px rgba(255, 0, 150, 0.4);
-      }
-
-      .card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        display: block;
-      }
-
-      .card-content {
-        flex: 1;
-        padding: 1.2rem;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(6px);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .card-title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--pink);
-        margin-bottom: 0.3rem;
-      }
-
-      .card-role {
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: #d0d0d0;
-        margin-bottom: 0.8rem;
-      }
-
-      .card-desc {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: #ccc;
-      }
-
-      /* ===== DOWNLOAD BUTTON ===== */
-      .download-btn {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.6rem 1.2rem;
-        background: var(--pink);
-        color: #fff;
-        font-weight: 600;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background 0.25s ease, transform 0.2s ease;
-      }
-
-      .download-btn:hover {
-        background: var(--pink-light);
-        transform: translateY(-2px);
-      }
-
-      /* ===== ABOUT SECTION ===== */
-      .about-section {
-        display: flex;
-        justify-content: center;
-        padding: 3rem 2rem;
-      }
-
-      .about-card {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        background: var(--card-dark);
-        border-radius: 20px;
-        box-shadow: 0 0 15px rgba(255, 0, 150, 0.25);
-        max-width: 1000px;
-        width: 100%;
-        padding: 2rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .about-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 25px rgba(255, 0, 150, 0.4);
-      }
-
-      .about-image {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid var(--pink);
-        box-shadow: 0 0 20px rgba(255, 0, 150, 0.4);
-      }
-
-      .about-content {
-        flex: 1;
-        color: #ddd;
-      }
-
-      .about-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: var(--pink);
-        margin-bottom: 0.5rem;
-      }
-
-      .about-desc {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #ccc;
-        margin-bottom: 1.2rem;
-      }
-
-      /* ===== SOCIAL LINKS ===== */
-      .social-links {
-        display: flex;
-        gap: 1rem;
-      }
-
-      .social-links a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: rgba(255, 0, 204, 0.2);
-        color: #fff;
-        font-size: 1.2rem;
-        transition: background 0.3s ease, transform 0.2s ease;
-      }
-
-      .social-links a:hover {
-        background: var(--pink);
-        transform: scale(1.1);
-      }
-
-      /* ===== RESPONSIVE ===== */
-      @media (max-width: 700px) {
-        .about-card {
-          flex-direction: column;
-          text-align: center;
-        }
-
-        .about-image {
-          width: 130px;
-          height: 130px;
-        }
-
-        .social-links {
-          justify-content: center;
-        }
-      }
-    </style>
-  </head>
-
-  <body class="dark">
-    <div class="background"></div>
-    <button class="theme-toggle" id="themeToggle">☀ Light Mode</button>
-
-    <h1 style="margin-top:3rem; color:var(--pink)">Daliverse Projects</h1>
-
-    <!-- PROJECTS -->
-    <section class="grid-section">
-      <a href="https://discord.gg/tricking0" target="_blank"
-        rel="noopener noreferrer" class="card-link">
-        <div class="card">
-          <img src="assets/Tricking0.png" alt="Tricking 0 project image">
-          <div class="card-content">
-            <div>
-              <div class="card-title">Tricking 0</div>
-              <div class="card-role">Community Manager</div>
-              <p class="card-desc">
-                Tricking 0 is a physics-based flipping game that lets you
-                perform
-                tricking combos, parkour lines, and cliff jumps with full
-                control.
-                With an intuitive Flick-It system, seamless transitions, and
-                active ragdoll physics, it delivers the thrill of extreme
-                movement
-                sports, but without risking your neck.
-              </p>
-            </div>
-          </div>
+      <a class="pcard" href="https://discord.gg/tricking0" target="_blank" rel="noopener">
+        <div class="pcard-art art-tricking">
+          <svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M-20 130 C 60 130, 90 20, 160 40 S 260 150, 320 60" stroke="#ff004c" stroke-width="3" fill="none" opacity="0.8"/>
+            <path d="M-20 90 C 70 90, 100 10, 180 30 S 270 110, 330 30" stroke="#ff004c" stroke-width="2" fill="none" opacity="0.35"/>
+          </svg>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-role">Community Manager</p>
+          <h3>Tricking 0</h3>
+          <p>A physics-based flipping game — <em>tricking combos, parkour lines, cliff jumps</em> — with a Flick-It system and active ragdoll physics. All the thrill of extreme movement, none of the neck risk.</p>
+          <span class="pcard-link">Join the server
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </span>
         </div>
       </a>
 
-      <a href="https://discord.gg/mysticgens" target="_blank"
-        rel="noopener noreferrer" class="card-link">
-        <div class="card">
-          <img src="assets/Mystic Network Logo W Background.png"
-            alt="Mystic Gens project image">
-          <div class="card-content">
-            <div>
-              <div class="card-title">Mystic Gens</div>
-              <div class="card-role">Manager & Developer</div>
-              <p class="card-desc">
-                High above the clouds, <strong>Mystic Gens</strong> challenges
-                you to turn magic into profit.
-                Upgrade your generators, expand your sky island, and master
-                <em>mining</em>, <em>farming</em>, and <em>fishing</em>
-                to build your fortune before the season ends.
-              </p>
-            </div>
-          </div>
+      <a class="pcard" href="https://discord.gg/mysticgens" target="_blank" rel="noopener">
+        <div class="pcard-art art-mystic">
+          <div class="stars" id="mysticStars"></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-role">Manager & Developer</p>
+          <h3>Mystic Gens</h3>
+          <p>High above the clouds, turn magic into profit. Upgrade generators, expand your sky island, and master <em>mining</em>, <em>farming</em>, and <em>fishing</em> before the season ends.</p>
+          <span class="pcard-link">Join the server
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </span>
         </div>
       </a>
 
-      <a href="https://discord.gg/4PGMJ9JTs5" target="_blank"
-        rel="noopener noreferrer" class="card-link">
-        <div class="card">
-          <img src="assets/MHFARM.png" alt="MHFarm project image">
-          <div class="card-content">
-            <div>
-              <div class="card-title">MHFarm</div>
-              <div class="card-role">Administrator</div>
-              <p class="card-desc">
-                <strong>MHFarm</strong> is a farming tycoon server on
-                <em>Minehut</em>,
-                set in a <em>plotworld</em> where your goal is to grow, trade,
-                and expand your way to the top before the season ends.
-              </p>
-            </div>
-          </div>
+      <a class="pcard" href="https://discord.gg/4PGMJ9JTs5" target="_blank" rel="noopener">
+        <div class="pcard-art art-farm">
+          <div class="grid-pat"></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-role">Administrator</p>
+          <h3>MHFarm</h3>
+          <p>A farming tycoon server on <em>Minehut</em>, set in a plotworld where the goal is simple: grow, trade, and expand your way to the top before the season ends.</p>
+          <span class="pcard-link">Join the server
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </span>
         </div>
       </a>
-    </section>
 
-    <h1 style="margin-top:2rem; color:var(--pink)">Tricking 0 Map Downloads</h1>
+    </div>
+  </div>
+</section>
 
-    <!-- TRICKING-0 MAP DOWNLOADS -->
-    <section class="grid-section">
-      <div class="card">
-        <img src="assets/soon.png" alt="Coming Soon map image">
-        <div class="card-content">
-          <div>
-            <div class="card-title">Coming Soon</div>
-          </div>
-          <a href="#" class="download-btn">Download</a>
+<section id="maps">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">02 — Tricking 0 map downloads</p>
+      <h2>Grab a map, drop in</h2>
+      <p>Custom Tricking 0 maps, built and released one island at a time.</p>
+    </div>
+
+    <div class="maps-grid">
+
+      <div class="mcard">
+        <div class="mcard-img">
+          <img src="https://daliverse.nl/assets/Axora.png" alt="Axora map preview" loading="lazy">
+        </div>
+        <div class="mcard-body">
+          <h3>Axora</h3>
+          <p>Discovered in <strong>2012</strong> by legendary tricker and cliff diver Axoria Fonso, Axora was once wild and untouched. By <strong>2020</strong> it had become a hotspot where the limits of movement meet the beauty of the sea.</p>
+          <a class="mcard-dl active" href="https://daliverse.nl/Axora.zip">Download map</a>
         </div>
       </div>
 
-      <div class="card">
-        <img src="assets/Axora.png" alt="Axora map image">
-        <div class="card-content">
-          <div>
-            <div class="card-title">Axora</div>
-            <p class="card-desc">
-              Discovered in <strong>2012</strong> by legendary tricker and cliff
-              diver
-              <em>Axoria Fonso</em>, the islands of <strong>Axora</strong> were
-              once wild and untouched.
-              In <strong>2020</strong>, they became a paradise for trickers and
-              divers alike —
-              a hotspot where the limits of movement meet the beauty of the sea.
-            </p>
-          </div>
-          <a href="Axora.zip" class="download-btn">Download</a>
+      <div class="mcard">
+        <div class="mcard-img soon"><span>Coming soon</span></div>
+        <div class="mcard-body">
+          <h3>Untitled Map 02</h3>
+          <p>Next island is in the works. Follow along on Discord or Instagram to see it as it's built.</p>
+          <a class="mcard-dl disabled" href="#" aria-disabled="true">Not yet available</a>
         </div>
       </div>
 
-      <div class="card">
-        <img src="assets/soon.png" alt="Coming Soon map image">
-        <div class="card-content">
-          <div class="card-title">Coming Soon</div>
-          <a href="#" class="download-btn">Download</a>
+      <div class="mcard">
+        <div class="mcard-img soon"><span>Coming soon</span></div>
+        <div class="mcard-body">
+          <h3>Untitled Map 03</h3>
+          <p>Another one is on the way after that. Two in the pipeline, more to come.</p>
+          <a class="mcard-dl disabled" href="#" aria-disabled="true">Not yet available</a>
         </div>
       </div>
-    </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="about-section">
-      <div class="about-card">
-        <img src="assets/Dali1.jpg" alt="Dali portrait" class="about-image">
-        <div class="about-content">
-          <div class="about-title">Dali</div>
-          <p class="about-desc">
-            Welcome to my little corner of the <strong>Daliverse</strong>.
-            I’m <strong>Dali</strong>, a 21-year-old <em>Martial Arts
-              Tricker</em> and <em>trampoliner</em>
-            with a love for gaming, creativity, and building communities across
-            Discord and game servers.
-            Check out my <strong>Tricking 0</strong> maps above and see what
-            I’ve been creating!
-          </p>
+    </div>
+  </div>
+</section>
 
-          <div class="social-links">
-            <a href="https://www.instagram.com/dalichano.alkm/" target="_blank"
-              title="Instagram">📸</a>
-            <a href="https://www.youtube.com/@Dalichano" target="_blank"
-              title="YouTube">▶️</a>
-            <a href="https://tiktok.com/daliverse" target="_blank"
-              title="TikTok">🎵</a>
-            <a href="https://twitch.tv/dalichano" target="_blank"
-              title="Twitch">🎮</a>
-          </div>
-        </div>
+<section id="about">
+  <div class="wrap about">
+    <div class="about-photo">
+      <img src="https://daliverse.nl/assets/Dali1.jpg" alt="Portrait of Dali">
+    </div>
+    <div class="about-text">
+      <p class="eyebrow">03 — Who's behind it</p>
+      <h2>Hey, I'm Dali.</h2>
+      <p>I'm a <strong>21-year-old martial arts tricker</strong> and trampoliner with a love for gaming, creativity, and building communities across Discord and game servers.</p>
+      <p>Tricking 0 started as a way to bring that same movement — flips, combos, flow — into a game. Mystic Gens and MHFarm grew out of the same instinct: build a small world, invite people in, watch it become something.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">3</div><div class="lbl">Communities</div></div>
+        <div class="stat"><div class="num">21</div><div class="lbl">Years old</div></div>
+        <div class="stat"><div class="num">1</div><div class="lbl">Map released</div></div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <script>
-      const toggle = document.getElementById("themeToggle");
-      const body = document.body;
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">Daliverse
+      <span>Built by Dali · Alkmaar, NL</span>
+    </div>
+    <div class="socials">
+      <a class="social-btn" href="https://www.instagram.com/dalichano.alkm/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a class="social-btn" href="https://www.youtube.com/@Dalichano" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="social-btn" href="https://tiktok.com/daliverse" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4v9.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c0 2.5 2 4.5 4.5 4.5"/></svg>
+      </a>
+      <a class="social-btn" href="https://twitch.tv/dalichano" target="_blank" rel="noopener" aria-label="Twitch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h16v11l-4 4h-4l-3 3H7v-3H4V6l1-3z"/><path d="M14 8v4M18 8v4"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
 
-      const savedTheme = localStorage.getItem("daliverse-theme");
-      if (savedTheme) {
-        body.className = savedTheme;
-        toggle.textContent = savedTheme === "dark" ? "☀ Light Mode" : "🌙 Dark Mode";
-      }
+<script>
+  // scatter stars for Mystic Gens card
+  const starsEl = document.getElementById('mysticStars');
+  if(starsEl){
+    for(let i=0;i<18;i++){
+      const s = document.createElement('span');
+      s.style.left = Math.random()*100 + '%';
+      s.style.top = Math.random()*100 + '%';
+      s.style.opacity = (0.3 + Math.random()*0.6).toFixed(2);
+      starsEl.appendChild(s);
+    }
+  }
+</script>
 
-      toggle.addEventListener("click", () => {
-        if (body.classList.contains("dark")) {
-          body.classList.replace("dark", "light");
-          toggle.textContent = "🌙 Dark Mode";
-          localStorage.setItem("daliverse-theme", "light");
-        } else {
-          body.classList.replace("light", "dark");
-          toggle.textContent = "☀ Light Mode";
-          localStorage.setItem("daliverse-theme", "dark");
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>
