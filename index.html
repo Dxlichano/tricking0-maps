@@ -577,7 +577,7 @@
         <a class="project-feature" href="https://discord.gg/tricking0"
           target="_blank" rel="noopener">
           <div class="project-feature-art art-tricking">
-            <img src="assets/tricking0-cover.jpg" alt="Tricking 0 gameplay">
+            <img src="assets/Ilusion.png" alt="Tricking 0 Illustrator">
             <div class="art-scrim"></div>
             <svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true">
@@ -722,7 +722,8 @@
     <div class="lightbox" id="lightbox">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          stroke="currentColor" stroke-width="2"><path
+            d="M6 6l12 12M18 6L6 18" /></svg>
       </button>
       <video id="lightboxVideo" controls playsinline></video>
     </div>
@@ -795,10 +796,11 @@
     <script>
       // ---- Clips gallery ----------------------------------------------
       // Add your clips here. Leave src/poster empty to show a placeholder slot.
-      // orientation only affects the placeholder's shape — real videos size
-      // themselves automatically, horizontal or vertical, once you add a src.
+      // Once a clip has a real src, its horizontal/vertical badge is detected
+      // automatically from the video file itself — the `orientation` field
+      // below is only used to shape the empty placeholder slots.
       const CLIPS = [
-        { src: '', poster: '', orientation: 'horizontal', label: 'clip-01.mp4' },
+        { src: 'assets/Tricking0_Replay_20260804_221124', poster: '', orientation: 'horizontal', label: 'clip-01.mp4' },
         { src: '', poster: '', orientation: 'vertical',   label: 'clip-02.mp4' },
         { src: '', poster: '', orientation: 'vertical',   label: 'clip-03.mp4' },
         { src: '', poster: '', orientation: 'horizontal', label: 'clip-04.mp4' },
@@ -820,11 +822,20 @@
           if(clip.src){
             card.classList.add('has-video');
             card.innerHTML = `
-              <span class="clip-orientation">${clip.orientation}</span>
+              <span class="clip-orientation" hidden></span>
               <video src="${clip.src}" poster="${clip.poster || ''}" muted loop playsinline preload="metadata"></video>
               <div class="clip-overlay"><span class="play-badge">${playIcon}</span></div>
             `;
             const video = card.querySelector('video');
+            const badge = card.querySelector('.clip-orientation');
+
+            // Auto-detect orientation from the real file — no manual flag needed.
+            video.addEventListener('loadedmetadata', () => {
+              const vertical = video.videoHeight > video.videoWidth;
+              badge.textContent = vertical ? 'vertical' : 'horizontal';
+              badge.hidden = false;
+            });
+
             card.addEventListener('mouseenter', () => video.play().catch(()=>{}));
             card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
             card.addEventListener('click', () => openLightbox(clip));
