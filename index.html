@@ -357,6 +357,30 @@
   .mcard-dl.disabled{ color: var(--text-dimmer); cursor:default; pointer-events:none; }
 
   /* ---------- CLIPS GALLERY ---------- */
+  .clips-head-row{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom: 30px;
+  }
+  .clip-filters{ display:flex; gap:8px; }
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.74rem;
+    letter-spacing:0.03em;
+    padding: 8px 15px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    background:transparent;
+    cursor:pointer;
+    transition: all .18s ease;
+  }
+  .chip:hover{ border-color: rgba(255,255,255,0.25); color:var(--text); }
+  .chip.active{ border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+
   .clips-grid{
     columns: 3 300px;
     column-gap: 20px;
@@ -372,19 +396,26 @@
     overflow: hidden;
     border: 1px solid var(--border);
     background: var(--panel);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .4s ease, transform .4s ease, border-color .2s ease;
   }
+  .clip-card.in-view{ opacity:1; transform:none; }
+  .clip-card.hidden-by-filter{ display:none; }
   .clip-card.has-video{ cursor: pointer; }
+  .clip-card.has-video:hover{ border-color: rgba(255,255,255,0.2); }
   .clip-card video{
     display:block;
     width:100%;
     height:auto;
-    background: var(--panel-2);
+    background:
+      linear-gradient(135deg, var(--panel-2), var(--panel));
   }
   .clip-overlay{
     position:absolute; inset:0;
-    display:flex; align-items:flex-end;
+    display:flex; flex-direction:column; justify-content:space-between;
     padding: 14px;
-    background: linear-gradient(180deg, transparent 55%, rgba(21,10,16,0.85));
+    background: linear-gradient(180deg, transparent 50%, rgba(21,10,16,0.88));
     opacity: 0;
     transition: opacity .2s ease;
   }
@@ -398,6 +429,12 @@
     color:#fff;
     margin-left:auto;
   }
+  .clip-caption{
+    font-size:0.82rem;
+    color:#fff;
+    font-weight:500;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
   .clip-orientation{
     position:absolute; top:10px; left:10px;
     font-family:'JetBrains Mono', monospace;
@@ -409,12 +446,14 @@
     padding:4px 9px;
     border-radius:999px;
     border: 1px solid var(--border);
+    z-index:1;
   }
 
   .clip-card.is-empty{
     display:flex; align-items:center; justify-content:center;
     border-style: dashed;
     background: var(--panel-2);
+    cursor:default;
   }
   .clip-empty{
     display:flex; flex-direction:column; align-items:center; gap:10px;
@@ -425,6 +464,16 @@
     padding: 30px 16px;
   }
   .clip-empty svg{ opacity:0.55; }
+
+  .clips-empty-state{
+    grid-column: 1 / -1;
+    text-align:center;
+    padding: 50px 20px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--text-dim);
+    font-size:0.92rem;
+  }
 
   .lightbox{
     position: fixed; inset:0;
@@ -438,11 +487,17 @@
     transition: opacity .25s ease;
   }
   .lightbox.open{ opacity:1; pointer-events:auto; }
+  .lightbox-inner{ display:flex; flex-direction:column; align-items:center; gap:14px; max-width:90vw; }
   .lightbox video{
     max-width: 90vw;
-    max-height: 88vh;
+    max-height: 80vh;
     border-radius: 14px;
     box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  }
+  .lightbox-caption{
+    color: var(--text-dim);
+    font-size:0.88rem;
+    text-align:center;
   }
   .lightbox-close{
     position:absolute; top:24px; right:26px;
@@ -455,6 +510,20 @@
     transition: all .2s ease;
   }
   .lightbox-close:hover{ border-color: var(--cyan); background: var(--cyan-soft); }
+  .lightbox-nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:48px; height:48px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    display:flex; align-items:center; justify-content:center;
+    transition: all .2s ease;
+  }
+  .lightbox-nav:hover{ border-color: var(--cyan); background: var(--cyan-soft); }
+  .lightbox-nav.prev{ left:20px; }
+  .lightbox-nav.next{ right:20px; }
+  @media(max-width:640px){ .lightbox-nav{ display:none; } }
 
   /* ---------- ABOUT ---------- */
   .about{
@@ -697,11 +766,18 @@
 
     <section id="clips">
       <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">03 — Clips</p>
-          <h2>Tricking 0 in motion</h2>
-          <p>A mix of horizontal and vertical clips from the game. Hover to
-            preview, click to watch full size.</p>
+        <div class="clips-head-row">
+          <div class="section-head" style="margin-bottom:0;">
+            <p class="eyebrow">03 — Clips</p>
+            <h2>Tricking 0 in motion</h2>
+            <p>A mix of horizontal and vertical clips from the game. Hover to
+              preview, click to watch full size.</p>
+          </div>
+          <div class="clip-filters" id="clipFilters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="horizontal">Horizontal</button>
+            <button class="chip" data-filter="vertical">Vertical</button>
+          </div>
         </div>
 
         <div class="clips-grid" id="clipsGrid"></div>
@@ -714,7 +790,16 @@
           stroke="currentColor" stroke-width="2"><path
             d="M6 6l12 12M18 6L6 18" /></svg>
       </button>
-      <video id="lightboxVideo" controls playsinline></video>
+      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous clip">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="lightbox-nav next" id="lightboxNext" aria-label="Next clip">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="lightbox-inner">
+        <video id="lightboxVideo" controls playsinline></video>
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
     </div>
 
     <section id="about">
@@ -783,69 +868,131 @@
     </footer>
 
     <script>
-      // ---- Clips gallery ----------------------------------------------
-      // Add your clips here. Leave src/poster empty to show a placeholder slot.
-      // Once a clip has a real src, its horizontal/vertical badge is detected
-      // automatically from the video file itself — the `orientation` field
-      // below is only used to shape the empty placeholder slots.
-      const CLIPS = [
-        { src: 'assets/clip-01.mp4', poster: '', orientation: 'horizontal', label: 'clip-01.mp4' },
-        { src: 'assets/clip-02.mp4', poster: '', orientation: 'vertical',   label: 'clip-02.mp4' },
-        { src: 'assets/clip-03.mp4', poster: '', orientation: 'vertical',   label: 'clip-03.mp4' },
-        { src: 'assets/clip-04.mp4', poster: '', orientation: 'horizontal', label: 'clip-04.mp4' },
-        { src: 'assets/clip-05.mp4', poster: '', orientation: 'vertical',   label: 'clip-05.mp4' },
-        { src: 'assets/clip-06.mp4', poster: '', orientation: 'horizontal', label: 'clip-06.mp4' },
-      ];
+    <script>
+      // ---- Clips gallery -----------------------------------------------
+      // Clips are no longer hardcoded here. Add/remove/reorder clips by
+      // editing assets/clips.json — nothing in this file needs to
+      // change. Use clip-manager.html (in the site folder) to generate
+      // that JSON and matching thumbnails automatically from your videos.
+      const CLIPS_JSON_PATH = 'assets/clips.json';
 
-      const uploadIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>`;
       const playIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
 
-      function buildClips(){
+      let currentClips = [];
+      let currentIndex = -1;
+
+      async function loadClips(){
         const grid = document.getElementById('clipsGrid');
         if(!grid) return;
 
-        CLIPS.forEach(clip => {
+        try{
+          const res = await fetch(CLIPS_JSON_PATH, { cache: 'no-store' });
+          if(!res.ok) throw new Error('missing clips.json');
+          const clips = await res.json();
+          if(!Array.isArray(clips) || clips.length === 0) throw new Error('empty');
+          renderClips(grid, clips);
+        } catch(err){
+          grid.innerHTML = `<div class="clips-empty-state">
+            No clips loaded yet. Add videos with <strong>clip-manager.html</strong>
+            and drop the generated files into <code>assets/</code>.
+          </div>`;
+          document.getElementById('clipFilters')?.style.setProperty('display','none');
+        }
+      }
+
+      function renderClips(grid, clips){
+        currentClips = clips;
+
+        clips.forEach((clip, i) => {
           const card = document.createElement('div');
-          card.className = 'clip-card';
+          card.className = 'clip-card has-video';
+          card.dataset.index = i;
+          card.dataset.orientation = clip.orientation || '';
 
-          if(clip.src){
-            card.classList.add('has-video');
-            card.innerHTML = `
-              <span class="clip-orientation" hidden></span>
-              <video src="${clip.src}" poster="${clip.poster || ''}" muted loop playsinline preload="metadata"></video>
-              <div class="clip-overlay"><span class="play-badge">${playIcon}</span></div>
-            `;
-            const video = card.querySelector('video');
-            const badge = card.querySelector('.clip-orientation');
+          card.innerHTML = `
+            <span class="clip-orientation" ${clip.orientation ? '' : 'hidden'}>${clip.orientation || ''}</span>
+            <video poster="${clip.poster || ''}" muted loop playsinline preload="none" data-src="${clip.src}"></video>
+            <div class="clip-overlay">
+              <span class="play-badge">${playIcon}</span>
+              ${clip.caption ? `<span class="clip-caption">${clip.caption}</span>` : ''}
+            </div>
+          `;
 
-            // Auto-detect orientation from the real file — no manual flag needed.
-            video.addEventListener('loadedmetadata', () => {
+          const video = card.querySelector('video');
+          const badge = card.querySelector('.clip-orientation');
+
+          card.addEventListener('mouseenter', () => {
+            if(!video.src) video.src = video.dataset.src;
+            video.play().catch(()=>{});
+          });
+          card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+          card.addEventListener('click', () => openLightbox(i));
+
+          video.addEventListener('loadedmetadata', () => {
+            if(!clip.orientation){
               const vertical = video.videoHeight > video.videoWidth;
-              badge.textContent = vertical ? 'vertical' : 'horizontal';
+              const detected = vertical ? 'vertical' : 'horizontal';
+              badge.textContent = detected;
               badge.hidden = false;
-            });
-
-            card.addEventListener('mouseenter', () => video.play().catch(()=>{}));
-            card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
-            card.addEventListener('click', () => openLightbox(clip));
-          } else {
-            card.classList.add('is-empty');
-            card.style.aspectRatio = clip.orientation === 'vertical' ? '9 / 16' : '16 / 9';
-            card.innerHTML = `<div class="clip-empty">${uploadIcon}<span>${clip.label}</span></div>`;
-          }
+              card.dataset.orientation = detected;
+            }
+          });
 
           grid.appendChild(card);
         });
+
+        // Lazy-load: only start fetching each clip once it's near view
+        const cards = grid.querySelectorAll('.clip-card');
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              const card = entry.target;
+              const video = card.querySelector('video');
+              if(video) video.preload = 'metadata';
+              card.classList.add('in-view');
+              io.unobserve(card);
+            }
+          });
+        }, { rootMargin: '150px' });
+        cards.forEach(c => io.observe(c));
+
+        setupFilters();
       }
 
-      function openLightbox(clip){
+      function setupFilters(){
+        const filterBar = document.getElementById('clipFilters');
+        if(!filterBar) return;
+        filterBar.addEventListener('click', (e) => {
+          const chip = e.target.closest('.chip');
+          if(!chip) return;
+          filterBar.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const filter = chip.dataset.filter;
+          document.querySelectorAll('.clip-card').forEach(card => {
+            const match = filter === 'all' || card.dataset.orientation === filter;
+            card.classList.toggle('hidden-by-filter', !match);
+          });
+        });
+      }
+
+      function openLightbox(index){
+        currentIndex = index;
+        const clip = currentClips[index];
         const lightbox = document.getElementById('lightbox');
         const video = document.getElementById('lightboxVideo');
+        const caption = document.getElementById('lightboxCaption');
         video.src = clip.src;
         if(clip.poster) video.poster = clip.poster;
+        caption.textContent = clip.caption || '';
         lightbox.classList.add('open');
         video.currentTime = 0;
         video.play().catch(()=>{});
+      }
+
+      function stepLightbox(delta){
+        if(currentClips.length === 0) return;
+        const next = (currentIndex + delta + currentClips.length) % currentClips.length;
+        openLightbox(next);
       }
 
       function closeLightbox(){
@@ -858,14 +1005,20 @@
       }
 
       document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+      document.getElementById('lightboxPrev')?.addEventListener('click', () => stepLightbox(-1));
+      document.getElementById('lightboxNext')?.addEventListener('click', () => stepLightbox(1));
       document.getElementById('lightbox')?.addEventListener('click', (e) => {
         if(e.target.id === 'lightbox') closeLightbox();
       });
       document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        if(!lightbox?.classList.contains('open')) return;
         if(e.key === 'Escape') closeLightbox();
+        if(e.key === 'ArrowLeft') stepLightbox(-1);
+        if(e.key === 'ArrowRight') stepLightbox(1);
       });
 
-      buildClips();
+      loadClips();
     </script>
 
   </body>
