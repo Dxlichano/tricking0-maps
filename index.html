@@ -291,20 +291,16 @@
   .role-card p{ color:var(--text-dim); font-size:0.87rem; flex:1; }
 
   /* art variants */
-  .art-tricking{ background:
-      radial-gradient(60% 90% at 20% 20%, rgba(255,0,76,0.35), transparent 60%),
-      linear-gradient(135deg, #2c1424, #1b0d14); }
+  .art-tricking{ background: linear-gradient(135deg, #2c1424, #1b0d14); }
   .art-tricking img{
     position:absolute; inset:0;
     width:100%; height:100%;
     object-fit:cover;
-    opacity:0.55;
   }
   .art-tricking .art-scrim{
     position:absolute; inset:0;
-    background: linear-gradient(100deg, rgba(21,10,16,0.85) 10%, rgba(21,10,16,0.15) 75%);
+    background: linear-gradient(100deg, rgba(21,10,16,0.55) 0%, rgba(21,10,16,0) 55%);
   }
-  .art-tricking svg{ position:absolute; bottom:-10px; left:-10px; width:140%; opacity:0.9; z-index:1; }
 
   /* ---------- MAPS ---------- */
   .maps-grid{
@@ -579,13 +575,6 @@
           <div class="project-feature-art art-tricking">
             <img src="assets/Ilusion.png" alt="Tricking 0 Illustrator">
             <div class="art-scrim"></div>
-            <svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true">
-              <path d="M-20 130 C 60 130, 90 20, 160 40 S 260 150, 320 60"
-                stroke="#ff004c" stroke-width="3" fill="none" opacity="0.8" />
-              <path d="M-20 90 C 70 90, 100 10, 180 30 S 270 110, 330 30"
-                stroke="#ff004c" stroke-width="2" fill="none" opacity="0.35" />
-            </svg>
           </div>
           <div class="project-feature-body">
             <p class="pcard-role">The project</p>
