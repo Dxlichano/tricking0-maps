@@ -294,7 +294,17 @@
   .art-tricking{ background:
       radial-gradient(60% 90% at 20% 20%, rgba(255,0,76,0.35), transparent 60%),
       linear-gradient(135deg, #2c1424, #1b0d14); }
-  .art-tricking svg{ position:absolute; bottom:-10px; left:-10px; width:140%; opacity:0.9; }
+  .art-tricking img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity:0.55;
+  }
+  .art-tricking .art-scrim{
+    position:absolute; inset:0;
+    background: linear-gradient(100deg, rgba(21,10,16,0.85) 10%, rgba(21,10,16,0.15) 75%);
+  }
+  .art-tricking svg{ position:absolute; bottom:-10px; left:-10px; width:140%; opacity:0.9; z-index:1; }
 
   /* ---------- MAPS ---------- */
   .maps-grid{
@@ -349,6 +359,106 @@
   .mcard-dl.active{ border-color: var(--gold); color:var(--gold); }
   .mcard-dl.active:hover{ background: var(--gold-soft); }
   .mcard-dl.disabled{ color: var(--text-dimmer); cursor:default; pointer-events:none; }
+
+  /* ---------- CLIPS GALLERY ---------- */
+  .clips-grid{
+    columns: 3 300px;
+    column-gap: 20px;
+  }
+  @media(max-width:860px){ .clips-grid{ columns: 2 240px; } }
+  @media(max-width:520px){ .clips-grid{ columns: 1; } }
+
+  .clip-card{
+    break-inside: avoid;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .clip-card.has-video{ cursor: pointer; }
+  .clip-card video{
+    display:block;
+    width:100%;
+    height:auto;
+    background: var(--panel-2);
+  }
+  .clip-overlay{
+    position:absolute; inset:0;
+    display:flex; align-items:flex-end;
+    padding: 14px;
+    background: linear-gradient(180deg, transparent 55%, rgba(21,10,16,0.85));
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+  .clip-card.has-video:hover .clip-overlay{ opacity:1; }
+  .clip-overlay .play-badge{
+    width:40px; height:40px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff;
+    margin-left:auto;
+  }
+  .clip-orientation{
+    position:absolute; top:10px; left:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color: var(--text-dimmer);
+    background: rgba(21,10,16,0.7);
+    padding:4px 9px;
+    border-radius:999px;
+    border: 1px solid var(--border);
+  }
+
+  .clip-card.is-empty{
+    display:flex; align-items:center; justify-content:center;
+    border-style: dashed;
+    background: var(--panel-2);
+  }
+  .clip-empty{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    color: var(--text-dimmer);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    text-align:center;
+    padding: 30px 16px;
+  }
+  .clip-empty svg{ opacity:0.55; }
+
+  .lightbox{
+    position: fixed; inset:0;
+    z-index: 300;
+    background: rgba(10,4,7,0.92);
+    backdrop-filter: blur(8px);
+    display:flex; align-items:center; justify-content:center;
+    padding: 50px 20px;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .25s ease;
+  }
+  .lightbox.open{ opacity:1; pointer-events:auto; }
+  .lightbox video{
+    max-width: 90vw;
+    max-height: 88vh;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  }
+  .lightbox-close{
+    position:absolute; top:24px; right:26px;
+    width:44px; height:44px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    display:flex; align-items:center; justify-content:center;
+    transition: all .2s ease;
+  }
+  .lightbox-close:hover{ border-color: var(--cyan); background: var(--cyan-soft); }
 
   /* ---------- ABOUT ---------- */
   .about{
@@ -417,10 +527,13 @@
         <nav class="links">
           <a href="#projects">Projects</a>
           <a href="#maps">Maps</a>
+          <a href="#clips">Clips</a>
           <a href="#about">Dali</a>
         </nav>
-        <a class="nav-cta" href="https://discord.gg/tricking0" target="_blank"
-          rel="noopener">Join a server</a>
+        <a class="nav-cta"
+          href="https://store.steampowered.com/app/1925560/Tricking_0/"
+          target="_blank"
+          rel="noopener">Get Tricking 0</a>
       </div>
     </header>
 
@@ -464,6 +577,8 @@
         <a class="project-feature" href="https://discord.gg/tricking0"
           target="_blank" rel="noopener">
           <div class="project-feature-art art-tricking">
+            <img src="assets/tricking0-cover.jpg" alt="Tricking 0 gameplay">
+            <div class="art-scrim"></div>
             <svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true">
               <path d="M-20 130 C 60 130, 90 20, 160 40 S 260 150, 320 60"
@@ -591,6 +706,27 @@
       </div>
     </section>
 
+    <section id="clips">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">03 — Clips</p>
+          <h2>Tricking 0 in motion</h2>
+          <p>A mix of horizontal and vertical clips from the game. Hover to
+            preview, click to watch full size.</p>
+        </div>
+
+        <div class="clips-grid" id="clipsGrid"></div>
+      </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <video id="lightboxVideo" controls playsinline></video>
+    </div>
+
     <section id="about">
       <div class="wrap about">
         <div class="about-photo">
@@ -598,7 +734,7 @@
             alt="Portrait of Dali">
         </div>
         <div class="about-text">
-          <p class="eyebrow">03 — Who's behind it</p>
+          <p class="eyebrow">04 — Who's behind it</p>
           <h2>Hey, I'm Dali.</h2>
           <p>I'm a <strong>22-year-old martial arts tricker</strong> and
             trampoliner with a love for gaming, creativity, and building
@@ -621,7 +757,7 @@
     <footer>
       <div class="wrap footer-inner">
         <div class="footer-brand">Daliverse
-          <span>Built by Dali · Alkmaar, NL</span>
+          <span>Built by Dali · The Netherlands</span>
         </div>
         <div class="socials">
           <a class="social-btn" href="https://www.instagram.com/dalichano.alkm/"
@@ -655,6 +791,82 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      // ---- Clips gallery ----------------------------------------------
+      // Add your clips here. Leave src/poster empty to show a placeholder slot.
+      // orientation only affects the placeholder's shape — real videos size
+      // themselves automatically, horizontal or vertical, once you add a src.
+      const CLIPS = [
+        { src: '', poster: '', orientation: 'horizontal', label: 'clip-01.mp4' },
+        { src: '', poster: '', orientation: 'vertical',   label: 'clip-02.mp4' },
+        { src: '', poster: '', orientation: 'vertical',   label: 'clip-03.mp4' },
+        { src: '', poster: '', orientation: 'horizontal', label: 'clip-04.mp4' },
+        { src: '', poster: '', orientation: 'vertical',   label: 'clip-05.mp4' },
+        { src: '', poster: '', orientation: 'horizontal', label: 'clip-06.mp4' },
+      ];
+
+      const uploadIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>`;
+      const playIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
+
+      function buildClips(){
+        const grid = document.getElementById('clipsGrid');
+        if(!grid) return;
+
+        CLIPS.forEach(clip => {
+          const card = document.createElement('div');
+          card.className = 'clip-card';
+
+          if(clip.src){
+            card.classList.add('has-video');
+            card.innerHTML = `
+              <span class="clip-orientation">${clip.orientation}</span>
+              <video src="${clip.src}" poster="${clip.poster || ''}" muted loop playsinline preload="metadata"></video>
+              <div class="clip-overlay"><span class="play-badge">${playIcon}</span></div>
+            `;
+            const video = card.querySelector('video');
+            card.addEventListener('mouseenter', () => video.play().catch(()=>{}));
+            card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+            card.addEventListener('click', () => openLightbox(clip));
+          } else {
+            card.classList.add('is-empty');
+            card.style.aspectRatio = clip.orientation === 'vertical' ? '9 / 16' : '16 / 9';
+            card.innerHTML = `<div class="clip-empty">${uploadIcon}<span>${clip.label}</span></div>`;
+          }
+
+          grid.appendChild(card);
+        });
+      }
+
+      function openLightbox(clip){
+        const lightbox = document.getElementById('lightbox');
+        const video = document.getElementById('lightboxVideo');
+        video.src = clip.src;
+        if(clip.poster) video.poster = clip.poster;
+        lightbox.classList.add('open');
+        video.currentTime = 0;
+        video.play().catch(()=>{});
+      }
+
+      function closeLightbox(){
+        const lightbox = document.getElementById('lightbox');
+        const video = document.getElementById('lightboxVideo');
+        lightbox.classList.remove('open');
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+
+      document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+      document.getElementById('lightbox')?.addEventListener('click', (e) => {
+        if(e.target.id === 'lightbox') closeLightbox();
+      });
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape') closeLightbox();
+      });
+
+      buildClips();
+    </script>
 
   </body>
 </html>
